@@ -30,7 +30,7 @@ from app import app
 ###########################################################
 
 #LOAD THE DIFFERENT FILES
-from lib import title, sidebar, geographic
+from lib import title, sidebar, geographic, demographic
 
 #PLACE THE COMPONENTS IN THE LAYOUT
 app.layout =html.Div(
@@ -38,6 +38,7 @@ app.layout =html.Div(
       title.title,
       sidebar.sidebar,
       geographic.geographic_output,
+      demographic.demographic_output,
 
     ],
     className="mj-app", #You can also add your own css files by locating them into the assets folder
