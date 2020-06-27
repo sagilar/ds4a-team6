@@ -39,9 +39,9 @@ sidebar=html.Div(
     [   ####################################################
         #Place the rest of Layout here
         ####################################################
-        html.H5("Select dates"),
-        date_picker,
-        html.Hr(),
+        #html.H5("Select dates"),
+        #date_picker,
+        #html.Hr(),
 
     ],className='mj-sidebar'
 
