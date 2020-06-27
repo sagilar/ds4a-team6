@@ -40,12 +40,7 @@ df_dept_count.columns = ["NOMBRE_DPT","count"]
 #############################
 with open('../Colombia.geo.json') as geo:
     geojson = json.loads(geo.read())
-    '''colombia_geojson = geopandas.read_file(geo,driver="GeoJSON")
-    colombia_geojson["NOMBRE_DPT"].unique()
-    colombia_geojson_mod["NOMBRE_DPT"][colombia_geojson_mod["NOMBRE_DPT"]=="SANTAFE DE BOGOTA D.C"]="BOGOTA D.C."
-    colombia_geojson_mod["NOMBRE_DPT"][colombia_geojson_mod["NOMBRE_DPT"]=="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]="SAN ANDRES Y PROVIDENCIA"
-    dept_data = colombia_geojson_mod.join(df_dept_count.set_index("DEPTO_ESTABLECIMIENTO"),on="NOMBRE_DPT")
-    dept_data.fillna(0, inplace = True)'''
+
 
 print(df_dept_count.head())
 #Create the map:
@@ -70,6 +65,6 @@ geographic_output=html.Div([
     dcc.Graph(figure=Rec_dep_fig,id="Recidivism_dept_hist"),
     dbc.Row([
         dbc.Col(dcc.Graph(figure=Map_Fig, id='Colombia_map')),
-        dbc.Col(),        
+        dbc.Col(),
 	]),
     ],className="mj-body")
