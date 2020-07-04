@@ -15,8 +15,14 @@ import datetime as dt
 import pandas as pd
 import json
 
+# Flask
+import flask
+
 #Recall app
 from app import app
+
+# Apps
+from apps import home, models
 
 
 
@@ -27,14 +33,15 @@ from app import app
 ###########################################################
 
 #LOAD THE DIFFERENT FILES
-from lib import header, sidebar, main
+from lib import header, sidebar
 
 #PLACE THE COMPONENTS IN THE LAYOUT
 app.layout =html.Div(
     [ 
+      dcc.Location(id='url', refresh=False),
       header.header,
       sidebar.sidebar,
-      main.content
+      html.Div(id='page-content')
     ],
     id="container"
 )
@@ -46,6 +53,18 @@ app.layout =html.Div(
 #           APP INTERACTIVITY:
 #
 ###############################################
+
+###############################################################
+#Callbacks for routing
+#################################################################
+
+@app.callback(Output('page-content', 'children'),
+              [Input('url', 'pathname')])
+def display_page(pathname):
+    if pathname == '/models':
+        return models.layout
+    else:
+        return home.layout
 
 ###############################################################
 #Load and modify the data that will be used in the app.
