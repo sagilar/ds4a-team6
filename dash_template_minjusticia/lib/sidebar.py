@@ -58,8 +58,8 @@ sidebar = html.Aside(
                             html.Li(
                                 className="mt",
                                 children=[
-                                    html.A(
-                                        href="dashboard",
+                                    dcc.Link(
+                                        href="models",
                                         children=[
                                             html.I(
                                                 className="fa fa-tasks"
