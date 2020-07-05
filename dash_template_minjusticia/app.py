@@ -10,8 +10,7 @@ import dash
 
 external_scripts=[
     {
-        'src': "https://kit.fontawesome.com/09e110781e.js",
-        'crossorigin': "anonymous"
+        'src': "https://use.fontawesome.com/591d8b1c6c.js"
     }
 ]
 
