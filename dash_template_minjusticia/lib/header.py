@@ -22,8 +22,8 @@ header = html.Header(
                     )
                 ]
             ),
-            html.A(
-                href="#",
+            dcc.Link(
+                href="/",
                 className="logo",
                 children=[
                     html.B(

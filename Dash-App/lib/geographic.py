@@ -29,7 +29,7 @@ df_dept_count.columns = ["DEPTO_ESTABLECIMIENTO","count"]
 # RECIDIVISM BY DEPARTMENT HISTOGRAM
 ###############################################################
 
-Rec_dep_fig = px.histogram(df_dept_count,x="DEPTO_ESTABLECIMIENTO",y="count",nbins=50,hover_data=["DEPTO_ESTABLECIMIENTO","count"],color="DEPTO_ESTABLECIMIENTO")
+Rec_dep_fig = px.histogram(df_dept_count,x="DEPTO_ESTABLECIMIENTO",y="count",nbins=50,hover_data=["DEPTO_ESTABLECIMIENTO","count"])
 Rec_dep_fig.update_layout(title="Recidivism by department")
 
 add_data = {'NOMBRE_DPT':["VAUPES","VICHADA","GUAVIARE","GUAINIA"],'count':[0,0,0,0]}
