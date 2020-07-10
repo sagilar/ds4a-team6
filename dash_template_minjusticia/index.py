@@ -22,7 +22,7 @@ import flask
 from app import app
 
 # Apps
-from apps import home, models
+from apps import home, models, dataexploration
 
 
 
@@ -63,6 +63,8 @@ app.layout =html.Div(
 def display_page(pathname):
     if pathname == '/models':
         return models.layout
+    elif pathname == '/dataexploration':
+        return dataexploration.layout
     else:
         return home.layout
 
