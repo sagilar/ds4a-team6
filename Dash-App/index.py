@@ -30,7 +30,7 @@ from app import app
 ###########################################################
 
 #LOAD THE DIFFERENT FILES
-from lib import title, sidebar, geographic, demographic, timeanalysis, gender
+from lib import title, sidebar, geographic, crimeanalysis, demographic, timeanalysis, gender
 
 #PLACE THE COMPONENTS IN THE LAYOUT
 app.layout =html.Div(
@@ -38,6 +38,7 @@ app.layout =html.Div(
       title.title,
       sidebar.sidebar,
       geographic.geographic_output,
+      crimeanalysis.crimenalysis_output,
       demographic.demographic_output,
       timeanalysis.timeanalysis_output,
       gender.gender_output,
