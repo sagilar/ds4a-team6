@@ -8,7 +8,7 @@ import dash_html_components as html
 
 #Recall app
 from app import app
-from lib import rightpanel, cards, geographic
+from lib import rightpanel, cards, geographic, tabs
 
 layout = html.Section(
     id="main-content",
@@ -20,34 +20,39 @@ layout = html.Section(
                     className = "row",
                     children = [
                         html.Div(
-                            className = "col-lg-9 main-chart",
+                            className = "col-lg-12 main-chart",
                             children = [
                                 html.Div(
                                     children = [
                                         html.Div(
                                             className = "border-head",
                                             children= [
-                                                html.H3(
-                                                    "Información Geográfica"
+                                                
+                                                html.H2(
+                                                    children = [
+                                                        html.I(
+                                                            className ="fa fa-book"
+                                                        ),
+                                                        "Exploración de Datos"
+                                                    ]
                                                 )
                                             ]
                                         ),
-                                        geographic.geographic_histogram,
                                         html.Div(
-                                            className = "row mt",
-                                            children= [
-                                                cards.card1,
-                                                cards.card2,
-                                                cards.card3
+                                            className = "row content-panel",
+                                            children = [
+                                                tabs.navigationTabs,
+                                                tabs.content
+
                                             ]
-                                        ),
+                                        )
                                         
+                                                                             
                                         
                                     ]
                                 )
                             ]
-                        ),
-                        rightpanel.rightpanel
+                        )
                     ]
                 )
             ]
