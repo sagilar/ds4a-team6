@@ -41,11 +41,7 @@ card1 = html.Div(
                         html.Div(
                             className = "col-sm-6 col-xs-6 goleft",
                             children = [
-                                html.P(
-                                    children = [
-                                        html.H2("56%")
-                                    ]
-                                )
+                                html.H2("56%")
                             ]
                         )
                     ]
@@ -118,11 +114,7 @@ card3 = html.Div(
                         html.Div(
                             className = "col-sm-6 col-xs-6 goleft",
                             children = [
-                                html.P(
-                                    children = [
-                                        html.H2("56%")
-                                    ]
-                                )
+                                html.H2("56%")
                             ]
                         )
                     ]

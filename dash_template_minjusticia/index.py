@@ -7,6 +7,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objects as go
 import plotly.express as px
+from multiprocessing import Process, freeze_support
 
 #Data 
 import math
@@ -119,3 +120,4 @@ def display_page(pathname):
 
 if __name__ == "__main__":
     app.run_server(debug=True, port=9050)
+    freeze_support()
