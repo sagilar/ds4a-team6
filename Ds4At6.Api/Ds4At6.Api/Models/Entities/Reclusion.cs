@@ -21,9 +21,6 @@ namespace Ds4At6.Api.Models
         public int PrisonId { get; set; }
         public bool IsActive { get; set; }
 
-        public virtual Crime Crime { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual Prison Prison { get; set; }
-        public virtual ReclusionStatus ReclusionStatus { get; set; }
+     
     }
 }
