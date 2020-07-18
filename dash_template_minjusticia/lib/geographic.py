@@ -27,8 +27,10 @@ df_dept_count.columns = ["DEPTO_ESTABLECIMIENTO","count"]
 # RECIDIVISM BY DEPARTMENT HISTOGRAM
 ###############################################################
 
-Rec_dep_fig = px.histogram(df_dept_count,x="DEPTO_ESTABLECIMIENTO",y="count",nbins=50,hover_data=["DEPTO_ESTABLECIMIENTO","count"])
+Rec_dep_fig = px.histogram(df_dept_count,x="DEPTO_ESTABLECIMIENTO",y="count",nbins=50,hover_data=["DEPTO_ESTABLECIMIENTO","count"],
+                 width=800, height=400)
 Rec_dep_fig.update_layout(title="Recidivism by department", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+
 
 add_data = {'NOMBRE_DPT':["VAUPES","VICHADA","GUAVIARE","GUAINIA"],'count':[0,0,0,0]}
 add_df = pd.DataFrame(data=add_data)
@@ -77,3 +79,11 @@ geographic_histogram=html.Div([
     dcc.Graph(figure=Rec_dep_fig, id='Histogram')
     ])
 
+geographic_fulloutput=html.Div([
+	#Place the different graph components here.
+    dcc.Graph(figure=Rec_dep_fig,id="Recidivism_dept_hist"),
+    dbc.Row([
+        dbc.Col(dcc.Graph(figure=Map_Fig, id='Colombia_map')),
+        dbc.Col(),
+	]),
+    ],className="mj-body")

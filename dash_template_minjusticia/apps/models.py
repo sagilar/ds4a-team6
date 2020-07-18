@@ -8,64 +8,58 @@ import dash_html_components as html
 
 #Recall app
 from app import app
-from lib import rightpanel, cards, geographic
+from lib import rightpanel, cards, timeanalysis
 
 layout = html.Section(
     id="main-content",
     children = [
         html.Section(
-                    className = "wrapper site-min-height",
+            className = "wrapper",
+            children = [
+                html.Div(
+                    className = "row",
                     children = [
                         html.Div(
-                            className = "row mt mb",
+                            className = "col-lg-12 main-chart",
                             children = [
                                 html.Div(
-                                    className = "col-lg-12",
                                     children = [
-                                        html.H3(
-                                            children = [
-                                                
-                                                html.I(
-                                                    className = "fa fa-tasks"
-                                                ),
-                                                " Modelo 1",
-                                            ]
-                                        ),
-                                        html.Br(),
                                         html.Div(
-                                            className= "col-lg-4 col-md-4 col-sm-12",
-                                            children=[
-                                                html.Div(
-                                                    className = "dmbox",
+                                            className = "border-head",
+                                            children= [
+                                                
+                                                html.H2(
                                                     children = [
-                                                        html.Div(
-                                                            className = "service-icon",
-                                                            children = [
-                                                                html.A(
-                                                                href="/",
-                                                                children = [
-                                                                    html.I(
-                                                                        className = "dm-icon fa fa-question fa-3x"
-                                                                    )
-                                                                ]
-                                                                )
-                                                            ]
+                                                        html.I(
+                                                            className ="fa fa-book"
                                                         ),
-                                                        html.H4(
-                                                            "Modelo de Supervivencia"
-                                                        ),
-                                                        html.P(
-                                                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.."
-                                                        )
+                                                        "Modelo de Supervivencia"
                                                     ]
                                                 )
                                             ]
+                                        ),
+                                        html.Div(
+                                            className = "row content-panel",
+                                            children = [
+                                                html.Div(
+                                                    className = "col-md-12",
+                                                    children = [
+                                                        timeanalysis.survival_model
+                                                    ]
+                                                )
+                                            ]
+                                            
                                         )
+                                        
+                                                                             
+                                        
                                     ]
                                 )
                             ]
                         )
                     ]
                 )
+            ]
+        )
     ]
 ) 
