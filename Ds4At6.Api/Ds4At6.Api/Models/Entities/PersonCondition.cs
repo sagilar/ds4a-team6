@@ -9,7 +9,6 @@ namespace Ds4At6.Api.Models
         public int PersonId { get; set; }
         public int SpecialConditionId { get; set; }
 
-        public virtual Person Person { get; set; }
-        public virtual SpecialCondition SpecialCondition { get; set; }
+
     }
 }

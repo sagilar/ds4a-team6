@@ -10,7 +10,6 @@ namespace Ds4At6.Api.Models
         public int? CityId { get; set; }
         public int RegionalId { get; set; }
 
-        public virtual City City { get; set; }
-        public virtual Regional Regional { get; set; }
+     
     }
 }
