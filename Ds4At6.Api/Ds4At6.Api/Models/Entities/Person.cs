@@ -5,10 +5,7 @@ namespace Ds4At6.Api.Models
 {
     public partial class Person
     {
-        public Person()
-        {
-            PersonCondition = new HashSet<PersonCondition>();
-        }
+      
 
         public int PersonId { get; set; }
         public string RemoteId { get; set; }
@@ -35,10 +32,6 @@ namespace Ds4At6.Api.Models
         public bool? Rom { get; set; }
         public bool? Transexual { get; set; }
 
-        public virtual City City { get; set; }
-        public virtual Gender Gender { get; set; }
-        public virtual MaritalStatus MaritalStatus { get; set; }
-        public virtual Scholarship Scholarship { get; set; }
-        public virtual ICollection<PersonCondition> PersonCondition { get; set; }
+        
     }
 }

@@ -30,9 +30,6 @@ namespace Ds4At6.Api.Models
         public virtual DbSet<RegionsView> RegionsView { get; set; }
         public virtual DbSet<Scholarship> Scholarship { get; set; }
         public virtual DbSet<SpecialCondition> SpecialCondition { get; set; }
-        public virtual DbSet<Staging> Staging { get; set; }
-        public virtual DbSet<StatusLog> StatusLog { get; set; }
-        public virtual DbSet<TempPospenados> TempPospenados { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -66,11 +63,7 @@ namespace Ds4At6.Api.Models
                     .HasMaxLength(60)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Region)
-                    .WithMany(p => p.City)
-                    .HasForeignKey(d => d.RegionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_City_Region");
+               
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -156,41 +149,10 @@ namespace Ds4At6.Api.Models
 
                 entity.Property(e => e.Transexual).HasColumnName("TRANSEXUAL");
 
-                entity.HasOne(d => d.City)
-                    .WithMany(p => p.Person)
-                    .HasForeignKey(d => d.CityId)
-                    .HasConstraintName("FK_Person_City");
-
-                entity.HasOne(d => d.Gender)
-                    .WithMany(p => p.Person)
-                    .HasForeignKey(d => d.GenderId)
-                    .HasConstraintName("FK_Person_Gender");
-
-                entity.HasOne(d => d.MaritalStatus)
-                    .WithMany(p => p.Person)
-                    .HasForeignKey(d => d.MaritalStatusId)
-                    .HasConstraintName("FK_Person_MaritalStatus");
-
-                entity.HasOne(d => d.Scholarship)
-                    .WithMany(p => p.Person)
-                    .HasForeignKey(d => d.ScholarshipId)
-                    .HasConstraintName("FK_Person_Scholarship");
+              
             });
 
-            modelBuilder.Entity<PersonCondition>(entity =>
-            {
-                entity.HasOne(d => d.Person)
-                    .WithMany(p => p.PersonCondition)
-                    .HasForeignKey(d => d.PersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PersonCondition_Person");
-
-                entity.HasOne(d => d.SpecialCondition)
-                    .WithMany(p => p.PersonCondition)
-                    .HasForeignKey(d => d.SpecialConditionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PersonCondition_SpecialCondition");
-            });
+            
 
             modelBuilder.Entity<Prison>(entity =>
             {
@@ -199,16 +161,7 @@ namespace Ds4At6.Api.Models
                     .HasMaxLength(180)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.City)
-                    .WithMany(p => p.Prison)
-                    .HasForeignKey(d => d.CityId)
-                    .HasConstraintName("FK_ReclusionSite_City");
-
-                entity.HasOne(d => d.Regional)
-                    .WithMany(p => p.Prison)
-                    .HasForeignKey(d => d.RegionalId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ReclusionSite_Regional");
+            
             });
 
             modelBuilder.Entity<Reclusion>(entity =>
@@ -226,28 +179,6 @@ namespace Ds4At6.Api.Models
 
                 entity.Property(e => e.StartDate).HasColumnType("date");
 
-                entity.HasOne(d => d.Crime)
-                    .WithMany()
-                    .HasForeignKey(d => d.CrimeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Reclusion_Crime");
-
-                entity.HasOne(d => d.Person)
-                    .WithMany()
-                    .HasForeignKey(d => d.PersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Reclusion_Person");
-
-                entity.HasOne(d => d.Prison)
-                    .WithMany()
-                    .HasForeignKey(d => d.PrisonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Reclusion_ReclusionSite");
-
-                entity.HasOne(d => d.ReclusionStatus)
-                    .WithMany()
-                    .HasForeignKey(d => d.ReclusionStatusId)
-                    .HasConstraintName("FK_Reclusion_ReclusionStatus");
             });
 
             modelBuilder.Entity<ReclusionStatus>(entity =>
@@ -263,11 +194,7 @@ namespace Ds4At6.Api.Models
                     .HasMaxLength(60)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Country)
-                    .WithMany(p => p.Region)
-                    .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Region_Country");
+                
             });
 
             modelBuilder.Entity<Regional>(entity =>
@@ -307,280 +234,7 @@ namespace Ds4At6.Api.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Staging>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("staging");
-
-                entity.Property(e => e.ActividadesEnseñanza)
-                    .HasColumnName("ACTIVIDADES_ENSEÑANZA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ActividadesEstudio)
-                    .HasColumnName("ACTIVIDADES_ESTUDIO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ActividadesTrabajo)
-                    .HasColumnName("ACTIVIDADES_TRABAJO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Agravado)
-                    .HasColumnName("AGRAVADO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.AnoNacimiento)
-                    .HasColumnName("ANO_NACIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Calificado)
-                    .HasColumnName("CALIFICADO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Ciudad)
-                    .HasColumnName("CIUDAD")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.CodigoEstablecimiento)
-                    .HasColumnName("CODIGO_ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.CondicExpecional)
-                    .HasColumnName("CONDIC_EXPECIONAL")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Delito)
-                    .HasColumnName("DELITO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Departamento)
-                    .HasColumnName("DEPARTAMENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.DeptoEstablecimiento)
-                    .HasColumnName("DEPTO_ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Edad).HasColumnName("EDAD");
-
-                entity.Property(e => e.Establecimiento)
-                    .HasColumnName("ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Estado)
-                    .HasColumnName("ESTADO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.EstadoCivil)
-                    .HasColumnName("ESTADO_CIVIL")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.EstadoIngreso)
-                    .HasColumnName("ESTADO_INGRESO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.FechaCaptura)
-                    .HasColumnName("FECHA_CAPTURA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.FechaIngreso)
-                    .HasColumnName("FECHA_INGRESO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.FechaSalida)
-                    .HasColumnName("FECHA_SALIDA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Genero)
-                    .HasColumnName("GENERO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.HijosMenores)
-                    .HasColumnName("HIJOS_MENORES")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Internoen)
-                    .HasColumnName("INTERNOEN")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.MpioEstablecimiento)
-                    .HasColumnName("MPIO_ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.NivelEducativo)
-                    .HasColumnName("NIVEL_EDUCATIVO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.PaisInterno)
-                    .HasColumnName("PAIS_INTERNO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Regional)
-                    .HasColumnName("REGIONAL")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Reincidente)
-                    .HasColumnName("REINCIDENTE")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.SituacionJuridica)
-                    .HasColumnName("SITUACION_JURIDICA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.SubtituloDelito)
-                    .HasColumnName("SUBTITULO_DELITO")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Tentativa)
-                    .HasColumnName("TENTATIVA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.TituloDelito)
-                    .HasColumnName("TITULO_DELITO")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<StatusLog>(entity =>
-            {
-                entity.Property(e => e.ProcDate).HasColumnType("smalldatetime");
-            });
-
-            modelBuilder.Entity<TempPospenados>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("temp_pospenados");
-
-                entity.Property(e => e.ActividadesEnseñanza)
-                    .HasColumnName("ACTIVIDADES_ENSEÑANZA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ActividadesEstudio)
-                    .HasColumnName("ACTIVIDADES_ESTUDIO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.ActividadesTrabajo)
-                    .HasColumnName("ACTIVIDADES_TRABAJO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Agravado)
-                    .HasColumnName("AGRAVADO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.AnoNacimiento)
-                    .HasColumnName("ANO_NACIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Calificado)
-                    .HasColumnName("CALIFICADO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Ciudad)
-                    .HasColumnName("CIUDAD")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.CodigoEstablecimiento)
-                    .HasColumnName("CODIGO_ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.CondicExpecional)
-                    .HasColumnName("CONDIC_EXPECIONAL")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Delito)
-                    .HasColumnName("DELITO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Departamento)
-                    .HasColumnName("DEPARTAMENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.DeptoEstablecimiento)
-                    .HasColumnName("DEPTO_ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Edad).HasColumnName("EDAD");
-
-                entity.Property(e => e.Establecimiento)
-                    .HasColumnName("ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Estado)
-                    .HasColumnName("ESTADO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.EstadoCivil)
-                    .HasColumnName("ESTADO_CIVIL")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.EstadoIngreso)
-                    .HasColumnName("ESTADO_INGRESO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.FechaCaptura)
-                    .HasColumnName("FECHA_CAPTURA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.FechaIngreso)
-                    .HasColumnName("FECHA_INGRESO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.FechaSalida)
-                    .HasColumnName("FECHA_SALIDA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Genero)
-                    .HasColumnName("GENERO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.HijosMenores)
-                    .HasColumnName("HIJOS_MENORES")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Internoen)
-                    .HasColumnName("INTERNOEN")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.MpioEstablecimiento)
-                    .HasColumnName("MPIO_ESTABLECIMIENTO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.NivelEducativo)
-                    .HasColumnName("NIVEL_EDUCATIVO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.PaisInterno)
-                    .HasColumnName("PAIS_INTERNO")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Regional)
-                    .HasColumnName("REGIONAL")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.Reincidente)
-                    .HasColumnName("REINCIDENTE")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.SituacionJuridica)
-                    .HasColumnName("SITUACION_JURIDICA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.SubtituloDelito)
-                    .HasColumnName("SUBTITULO_DELITO")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Tentativa)
-                    .HasColumnName("TENTATIVA")
-                    .HasMaxLength(255);
-
-                entity.Property(e => e.TituloDelito)
-                    .HasColumnName("TITULO_DELITO")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-            });
+            
 
             OnModelCreatingPartial(modelBuilder);
         }
