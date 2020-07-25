@@ -17,13 +17,28 @@ namespace Ds4At6.Api.Helpers
             ConnectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
+        public List<CrimesByMaritalStatusViewModel> GetCrimesByMaritalStatus()
+        {
+            var procedure = "GetCrimesByMaritalStatus";
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<CrimesByMaritalStatusViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
+
         public List<CrimesByRegionViewModel> GetCrimesByRegion()
         {
             var procedure = "GetCrimesByRegion";
 
             using SqlConnection connection = new SqlConnection(ConnectionString);
             return connection.Query<CrimesByRegionViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
 
+        public List<CrimesByScholarshipViewModel> GetCrimesByScholarship()
+        {
+            var procedure = "GetCrimesByScholarship";
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<CrimesByScholarshipViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
         }
     }
 }
