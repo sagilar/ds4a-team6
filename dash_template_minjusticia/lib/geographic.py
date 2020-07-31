@@ -12,33 +12,32 @@ from datetime import datetime as dt
 import json
 import numpy as np
 import pandas as pd
+import requests
 
 #Recall app
 from app import app
 
-df_mj = pd.read_csv('data/reincidencia11junio2020_clean.csv', parse_dates=['FECHA_INGRESO','FECHA_SALIDA','FECHA_CAPTURA'])
-
-dept_count = df_mj["DEPTO_ESTABLECIMIENTO"].value_counts()
-df_dept_count = dept_count.reset_index()
-df_dept_count.columns = ["DEPTO_ESTABLECIMIENTO","count"]
-#print(df_dept_count.head())
+# Call API to get Crimes By Region
+r = requests.get("http://ds4at6api.azurewebsites.net/api/CrimesByRegion")
+df_dept_count =pd.read_json(r.text)
+df_dept_count = df_dept_count[["region", "events"]]
 
 ##############################################################
 # RECIDIVISM BY DEPARTMENT HISTOGRAM
 ###############################################################
 
-Rec_dep_fig = px.histogram(df_dept_count,x="DEPTO_ESTABLECIMIENTO",y="count",nbins=50,hover_data=["DEPTO_ESTABLECIMIENTO","count"],
+Rec_dep_fig = px.histogram(df_dept_count,x="region",y="events",nbins=50,hover_data=["region","events"],
                  width=800, height=400)
-Rec_dep_fig.update_layout(title="Recidivism by department", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+Rec_dep_fig.update_layout(title="Reincidencia por Departamento", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
 
 
-add_data = {'NOMBRE_DPT':["VAUPES","VICHADA","GUAVIARE","GUAINIA"],'count':[0,0,0,0]}
+add_data = {'region':["VAUPES","VICHADA","GUAVIARE","GUAINIA"],'events':[0,0,0,0]}
 add_df = pd.DataFrame(data=add_data)
 
 
-df_dept_count["DEPTO_ESTABLECIMIENTO"][df_dept_count["DEPTO_ESTABLECIMIENTO"]=="BOGOTA D.C."]="SANTAFE DE BOGOTA D.C"#]="BOGOTA D.C."
-df_dept_count["DEPTO_ESTABLECIMIENTO"][df_dept_count["DEPTO_ESTABLECIMIENTO"]=="SAN ANDRES Y PROVIDENCIA"]="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"#]="SAN ANDRES Y PROVIDENCIA"
-df_dept_count.columns = ["NOMBRE_DPT","count"]
+df_dept_count["region"][df_dept_count["region"]=="BOGOTA D.C."]="SANTAFE DE BOGOTA D.C"#]="BOGOTA D.C."
+df_dept_count["region"][df_dept_count["region"]=="SAN ANDRES Y PROVIDENCIA"]="ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"#]="SAN ANDRES Y PROVIDENCIA"
+df_dept_count.columns = ["region","events"]
 df_dept_count_comp = pd.concat([df_dept_count,add_df],ignore_index=True)
 df_dept_count_comp.fillna(0,inplace=True)
 
@@ -50,18 +49,18 @@ with open('data/Colombia_mod.geo.json') as geo:
     geojson_file = json.loads(geo.read())
 #Create the map:
 Map_Fig=px.choropleth_mapbox(df_dept_count_comp,
-        locations='NOMBRE_DPT',
-        color='count',
+        locations='region',
+        color='events',
         geojson=geojson_file,
         zoom=3,
         mapbox_style="carto-positron",
         center={"lat": 4.12, "lon": -73.22},
         color_continuous_scale="Viridis",
         opacity=0.5,
-        labels={"count":"Recidivism by department"}
+        labels={"events":"Reincidencia por Departamento"}
         )
 
-Map_Fig.update_layout(title='Colombian Recividism Map',
+Map_Fig.update_layout(title='Mapa de Reincidencia in Colombia',
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)')
 
