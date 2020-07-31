@@ -494,7 +494,7 @@ survival_model=html.Div([
         dbc.Col(dcc.Graph(figure=fig_surv_2, id='fig_surv_2'))
 	]),
     dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_surv_2, id='fig_surv_3')),
-        dbc.Col(dcc.Graph(figure=fig_surv_3, id='fig_surv_4')),
+        dbc.Col(dcc.Graph(figure=fig_surv_3, id='fig_surv_3')),
+        dbc.Col(dcc.Graph(figure=fig_surv_4, id='fig_surv_4')),
 	]),
 	],className="mj-body")
