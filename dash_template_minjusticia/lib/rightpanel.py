@@ -8,15 +8,98 @@ import dash_html_components as html
 #Recall app
 from app import app
 
+highlight1 = html.Div(
+    className = "desc",
+    children = [
+        html.Div(
+            className = "thumb",
+            children = [
+                html.Span(
+                    className = "badge bg-theme",
+                    children = [
+                        html.I(
+                            className = "fa fa-clock-o"
+                        )
+                    ]
+                )
+            ]
+        ),
+        html.Div(
+            className = "details",
+            children = [
+                html.P(
+                    "La mayoría de los casos se concentran en Bogotá, Antioquia, Valle del Cauca, Santander y Meta"
+                )
+            ]
+        )
+    ]
+)
+highlight2 = html.Div(
+    className = "desc",
+    children = [
+        html.Div(
+            className = "thumb",
+            children = [
+                html.Span(
+                    className = "badge bg-theme",
+                    children = [
+                        html.I(
+                            className = "fa fa-child"
+                        )
+                    ]
+                )
+            ]
+        ),
+        html.Div(
+            className = "details",
+            children = [
+                html.P(
+                    "El promedio de edad de los hombres reincidentes es 10 años menor que el de las mujeres."
+                )
+            ]
+        )
+    ]
+)
+highlight3 = html.Div(
+    className = "desc",
+    children = [
+        html.Div(
+            className = "thumb",
+            children = [
+                html.Span(
+                    className = "badge bg-theme",
+                    children = [
+                        html.I(
+                            className = "fa fa-tasks"
+                        )
+                    ]
+                )
+            ]
+        ),
+        html.Div(
+            className = "details",
+            children = [
+                html.P(
+                    "El crimen más cometido por los hombres es robo."
+                )
+            ]
+        )
+    ]
+)
+
+
 rightpanel= html.Div(
     className = "col-lg-3 ds",
     children = [
         html.Div(
-            className = "donut-main",
             children= [
                 html.H4(
-                    "Datos Demográficos"
-                )
+                    "Highlights",
+                    className = "centered mt"
+                ),
+                highlight1,
+                highlight2,
+                highlight3,
             ]
         )
     ]

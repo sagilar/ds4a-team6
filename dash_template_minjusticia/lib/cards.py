@@ -19,7 +19,7 @@ card1 = html.Div(
                     className = "grey-header",
                     children=[
                         html.H5(
-                            "Información por Género"
+                            "Tasa de Reincidencia"
                         )
                     ]
                 ),
@@ -33,7 +33,7 @@ card1 = html.Div(
                                     children = [
                                         "Porcentaje",
                                         html.Br(),
-                                        "Hombres: "
+                                       
                                     ]
                                 )
                             ]
@@ -41,7 +41,7 @@ card1 = html.Div(
                         html.Div(
                             className = "col-sm-6 col-xs-6 goleft",
                             children = [
-                                html.H2("56%")
+                                html.H2("50%")
                             ]
                         )
                     ]
@@ -61,26 +61,38 @@ card2 = html.Div(
                     className = "darkblue-header",
                     children=[
                         html.H5(
-                            "Información por Género"
+                            "Tasa de Reincidencia"
                         )
                     ]
                 ),
                 html.Div(
                     className = "row",
                     children = [
-                        html.P(
+                        html.Div(
+                            className = "col-sm-6 col-xs-6 goleft",
+                            children = [
+                                html.P(
                                     children = [
-                                        html.B("1500"),
-                                        " Hombres"
-                                    ],
-                                    className="mt"
+                                        "Porcentaje",
+                                        html.Br(),
+                                       
+                                    ]
                                 )
+                            ]
+                        ),
+                        html.Div(
+                            className = "col-sm-6 col-xs-6 goleft",
+                            children = [
+                                html.H2("50%")
+                            ]
+                        )
                     ]
                 )
             ]
         )
     ]
 )
+
 
 card3 = html.Div(
     className = "col-md-4 col-sm-4 mb",
