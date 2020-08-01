@@ -12,6 +12,8 @@ import numpy as np
 import pandas as pd
 import requests
 
+import pickle ## to load models.
+
 from app import app
 # Call Webservice to get Crimes List:
 r = requests.get("http://ds4at6api.azurewebsites.net/api/Crimes")
@@ -21,6 +23,11 @@ df_dropdown_crimes = df_crimes[['label', 'value']]
 #df_crimes = df_crimes.drop(['crimeId'], axis = 1)
 # Convert to a dictionary to let dropdown use it
 crimes = json.loads(df_dropdown_crimes.to_json(orient="records"))
+
+## Loading models
+#survival_model = pickle.load(open("data/modelo_COX_shdi_P4.pickle", 'rb'))
+#with open(r"data/modelo_COX_shdi_P4.pickle", "rb") as input_file:
+#    survival_model = pickle.load(input_file)
 
 education_levels = [
                 {'label': 'ANALFABETA', 'value': '1'},
@@ -34,7 +41,7 @@ education_levels = [
                 {'label': 'TECNOLOGICO', 'value': '12'},
                 {'label': 'ESPECIALIZACION', 'value': '6'},
                 {'label': 'MAGISTER', 'value': '7'},
-                {'label': 'POST GRADO', 'value': '8'}                
+                {'label': 'POST GRADO', 'value': '8'}
             ]
 
 age_input = dbc.FormGroup(
@@ -42,7 +49,7 @@ age_input = dbc.FormGroup(
         dbc.Label("Edad:", html_for="age_text"),
         html.Div(id='age_slider-container'),
         dbc.Input(type="number", min=18, max=100, value="21", step=1, id="age_text")
-        
+
     ]
 )
 
@@ -138,7 +145,7 @@ agravado_switch = dbc.FormGroup(
 )
 
 formLayout = html.Div(
-    [ 
+    [
         dbc.Row(
             [
                 dbc.Col(
@@ -152,7 +159,7 @@ formLayout = html.Div(
                         intento_switch,
                         calificado_switch,
                         agravado_switch
-                        
+
                     ],
                     md="4"
                 ),
@@ -164,12 +171,12 @@ formLayout = html.Div(
                 )
             ]
         )
-        
+
     ]
 )
 
 @app.callback(
-    Output("result_output", "figure"), 
+    Output("result_output", "figure"),
     [Input('age_text', 'value'),
      Input('events_text', 'value'),
      Input('education_dropdown', 'value'),
@@ -179,7 +186,7 @@ formLayout = html.Div(
      Input('intento_toogle', 'value'),
      Input('calificado_toogle', 'value'),
      Input('agravado_toogle', 'value'),
-     
+
      ]
 )
 def update_graph(age, events, education, crime, studies, teaching, intento, calificado, agravado):
@@ -205,6 +212,16 @@ def update_graph(age, events, education, crime, studies, teaching, intento, cali
     url = "https://team6flaskapi.azurewebsites.net/survival"
     requestSurvival = requests.post(url, json=payload)
     df_model = pd.read_json(requestSurvival.text)
+    #1.1. Get info from local model
+    ##["EDAD","tentativa","agravado","calificado","educacion", "ACTIVIDADES_ESTUDIO", "ACTIVIDADES_ENSEÑANZA",
+                  #"NUM_REINCIDENCIAS_ACUM", "En_Carcel","DIAS_CONDENA_ACUM_NORM","gnic_strata","pop**3"]
+
+    '''input_array = np.array([int(age),int(events),int(education),len(studies),
+                            len(teaching),len(intento),len(calificado),
+                            len(agravado),weight])
+    input_df = pd.DataFrame(data=input_array)
+    model_result = survival_model.predict(input_df)
+    print(model_result)'''
     #2. Generate scatter chart with info
     fig = go.Figure(data=go.Scatter(x=df_model.dia, y=df_model.prob))
     fig.update_layout(xaxis_title ="Días",yaxis_title = "Probabilidad", title = "Probabilidad de Reincidencia en el Tiempo", width=800, height=400)
