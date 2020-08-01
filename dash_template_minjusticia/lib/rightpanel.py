@@ -54,7 +54,7 @@ highlight2 = html.Div(
             className = "details",
             children = [
                 html.P(
-                    "El promedio de edad de los hombres reincidentes es 10 años menor que el de las mujeres."
+                    "Las personas que realizan estudios en el centro de reclusión tienen menos probabilidad de reincidir que los que no lo hacen."
                 )
             ]
         )
