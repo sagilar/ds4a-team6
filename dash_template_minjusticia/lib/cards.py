@@ -61,7 +61,7 @@ card2 = html.Div(
                     className = "darkblue-header",
                     children=[
                         html.H5(
-                            "Tasa de Reincidencia"
+                            "Hijos Menores"
                         )
                     ]
                 ),
@@ -69,11 +69,11 @@ card2 = html.Div(
                     className = "row",
                     children = [
                         html.Div(
-                            className = "col-sm-6 col-xs-6 goleft",
+                            className = "col-sm-6 col-xs-6",
                             children = [
                                 html.P(
                                     children = [
-                                        "Porcentaje",
+                                        "Tienen Hijos",
                                         html.Br(),
                                        
                                     ]
@@ -83,7 +83,7 @@ card2 = html.Div(
                         html.Div(
                             className = "col-sm-6 col-xs-6 goleft",
                             children = [
-                                html.H2("50%")
+                                html.H2("79%")
                             ]
                         )
                     ]
@@ -112,7 +112,7 @@ card3 = html.Div(
                     className = "row",
                     children = [
                         html.Div(
-                            className = "col-sm-6 col-xs-6 goleft",
+                            className = "col-sm-6 col-xs-6",
                             children = [
                                 html.P(
                                     children = [
@@ -126,7 +126,7 @@ card3 = html.Div(
                         html.Div(
                             className = "col-sm-6 col-xs-6 goleft",
                             children = [
-                                html.H2("56%")
+                                html.H2("90%")
                             ]
                         )
                     ]

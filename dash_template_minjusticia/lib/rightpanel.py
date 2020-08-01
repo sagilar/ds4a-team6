@@ -86,7 +86,32 @@ highlight3 = html.Div(
         )
     ]
 )
-
+highlight4 = html.Div(
+    className = "desc",
+    children = [
+        html.Div(
+            className = "thumb",
+            children = [
+                html.Span(
+                    className = "badge bg-theme",
+                    children = [
+                        html.I(
+                            className = "fa fa-binoculars"
+                        )
+                    ]
+                )
+            ]
+        ),
+        html.Div(
+            className = "details",
+            children = [
+                html.P(
+                    "El crimen más cometido por las mujeres es tráfico de drogas."
+                )
+            ]
+        )
+    ]
+)
 
 rightpanel= html.Div(
     className = "col-lg-3 ds",
@@ -100,6 +125,7 @@ rightpanel= html.Div(
                 highlight1,
                 highlight2,
                 highlight3,
+                highlight4,
             ]
         )
     ]

@@ -22,7 +22,6 @@ sidebar = html.Aside(
                                 className="mt",
                                 children=[
                                     dcc.Link(
-                                        className="active",
                                         href="dashboard",
                                         children=[
                                             html.I(
@@ -73,25 +72,6 @@ sidebar = html.Aside(
                                     )
                                 ]
                             ),
-                            html.Li(
-                                className="mt",
-                                children=[
-                                    html.A(
-                                        href="dashboard",
-                                        children=[
-                                            html.I(
-                                                className="fa fa-envelope"
-                                                
-                                            ),
-                                            html.Span(
-                                                "Recomendaciones"
-                                            )
-
-                                        ]
-                                    )
-                                ]
-                            ),
-                            
                         ]
                     )
                 ]
