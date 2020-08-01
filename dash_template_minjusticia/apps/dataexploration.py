@@ -8,7 +8,7 @@ import dash_html_components as html
 
 #Recall app
 from app import app
-from lib import rightpanel, cards, geographic, tabs
+from lib import tabs
 
 layout = html.Section(
     id="main-content",
