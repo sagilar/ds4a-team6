@@ -8,7 +8,7 @@ import dash_html_components as html
 
 #Recall app
 from app import app
-from lib import rightpanel, cards, timeanalysis
+from lib import survival
 
 layout = html.Section(
     id="main-content",
@@ -31,7 +31,7 @@ layout = html.Section(
                                                 html.H2(
                                                     children = [
                                                         html.I(
-                                                            className ="fa fa-book"
+                                                            className ="fa fa-users"
                                                         ),
                                                         "Modelo de Supervivencia"
                                                     ]
@@ -39,16 +39,15 @@ layout = html.Section(
                                             ]
                                         ),
                                         html.Div(
-                                            className = "row content-panel",
+                                            className = "container",
                                             children = [
                                                 html.Div(
                                                     className = "col-md-12",
                                                     children = [
-                                                        timeanalysis.survival_model
+                                                        survival.formLayout
                                                     ]
                                                 )
                                             ]
-                                            
                                         )
                                         
                                                                              
