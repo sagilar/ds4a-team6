@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 from multiprocessing import Process, freeze_support
 
-#Data 
+#Data
 import math
 import numpy as np
 import datetime as dt
@@ -23,7 +23,7 @@ import flask
 from app import app
 
 # Apps
-from apps import home, models, dataexploration
+from apps import home, models#, dataexploration
 
 
 
@@ -38,7 +38,7 @@ from lib import header, sidebar
 
 #PLACE THE COMPONENTS IN THE LAYOUT
 app.layout =html.Div(
-    [ 
+    [
       dcc.Location(id='url', refresh=False),
       header.header,
       sidebar.sidebar,
@@ -47,9 +47,9 @@ app.layout =html.Div(
     id="container"
 )
 
- 
-    
-###############################################   
+
+
+###############################################
 #
 #           APP INTERACTIVITY:
 #
@@ -108,15 +108,15 @@ def display_page(pathname):
 
 
 
-    
 
 
 
 
 
-                                                 
-           
-        
+
+
+
+
 
 if __name__ == "__main__":
     app.run_server(debug=True, port=9050)
