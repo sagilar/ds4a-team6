@@ -28,7 +28,7 @@ layout = html.Section(
                                             className = "border-head",
                                             children= [
                                                 html.H3(
-                                                    "Información Geográfica"
+                                                    "Análisis de Reincidencia en Colombia"
                                                 )
                                             ]
                                         ),

@@ -6,7 +6,7 @@
 #######################################################
 
 import dash
-
+import dash_bootstrap_components as dbc
 
 external_scripts=[
     {
@@ -14,7 +14,7 @@ external_scripts=[
     }
 ]
 
-app = dash.Dash(__name__, external_scripts = external_scripts)
+app = dash.Dash(__name__, external_scripts = external_scripts, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 #We need this for function callbacks not present in the app.layout

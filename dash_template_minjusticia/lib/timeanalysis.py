@@ -126,35 +126,35 @@ except:
     df_mj_mod.to_csv('output_data/time_analysis_df.csv',index=False)
 
 
-df_km = df_mj_mod[['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
-A = df_mj_mod[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] +  str(x['FECHA_INGRESO']), axis = 1)
-B = df_km[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
+# df_km = df_mj_mod[['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
+# A = df_mj_mod[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] +  str(x['FECHA_INGRESO']), axis = 1)
+# B = df_km[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
 
-diff = set(A).difference(set(B))
-where_diff = A.isin(diff)
+# diff = set(A).difference(set(B))
+# where_diff = A.isin(diff)
 
-df_kmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
+# df_kmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
 
-C = df_kmkm[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
+# C = df_kmkm[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
 
-diff = diff.difference(set(C))
-where_diff = A.isin(diff)
+# diff = diff.difference(set(C))
+# where_diff = A.isin(diff)
 
-df_kmkmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
+# df_kmkmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
 
-D = df_kmkmkm[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
+# D = df_kmkmkm[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
 
-diff = diff.difference(set(D))
-where_diff = A.isin(diff)
+# diff = diff.difference(set(D))
+# where_diff = A.isin(diff)
 
-df_kmkmkmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
+# df_kmkmkmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
 
-E = df_kmkmkmkm[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
+# E = df_kmkmkmkm[['INTERNOEN', 'FECHA_INGRESO']].apply(lambda x: x['INTERNOEN'] + str(x['FECHA_INGRESO']), axis = 1)
 
-diff = diff.difference(set(E))
-where_diff = A.isin(diff)
+# diff = diff.difference(set(E))
+# where_diff = A.isin(diff)
 
-df_kmkmkmkmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
+# df_kmkmkmkmkm = df_mj_mod.loc[where_diff, ['INTERNOEN', 'FECHA_INGRESO', 'DIAS_LIBRE', 'CENSURADO_LIBRES', 'ANO_INGRESO_INT', 'NUMERO_REINCIDENCIAS']].groupby('INTERNOEN').apply(lambda x: x.sort_values('FECHA_INGRESO', ascending = False).tail(1)).reset_index(drop = True)
 
 
 df_gen_fin = df_mj_mod.groupby(['INTERNOEN', 'GENERO'])['DIAS_CONDENA'].mean().reset_index(name = 'DIAS_CONDENA')
@@ -246,215 +246,215 @@ fig_freedom_work.update_layout(title='TOTAL FREEDOM DAYS BY WORKING ACTIVITIES',
 
 fig_surv_1 = go.Figure()
 
-for i in [0, 1]:
-    kmf = KaplanMeierFitter()
-    kmf.fit(df_km.loc[df_km['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_km.loc[df_km['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
+# for i in [0, 1]:
+#     kmf = KaplanMeierFitter()
+#     kmf.fit(df_km.loc[df_km['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_km.loc[df_km['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
 
-    if i == 0:
-        name= 'Días fuera de la cárcel (95% IC)'
-        fillcolor='rgba(0,176,246,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(0,176,246)'
-    else:
-        name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
-        fillcolor='rgba(231,107,243,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(231,107,243)'
+#     if i == 0:
+#         name= 'Días fuera de la cárcel (95% IC)'
+#         fillcolor='rgba(0,176,246,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(0,176,246)'
+#     else:
+#         name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
+#         fillcolor='rgba(231,107,243,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(231,107,243)'
 
-    df = kmf.survival_function_.reset_index()
-    df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
+#     df = kmf.survival_function_.reset_index()
+#     df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
 
-    df_interval = kmf.confidence_interval_survival_function_.reset_index()
-    df_interval.columns = ['Dias', 'lwr', 'upr']
+#     df_interval = kmf.confidence_interval_survival_function_.reset_index()
+#     df_interval.columns = ['Dias', 'lwr', 'upr']
 
-    fig_surv_1.add_trace(go.Scatter(
-        x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
-        y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
-        fill='toself',
-        fillcolor=fillcolor,
-        line_color=line_color,
-        showlegend=False,
-        name=name
-    ))
-    fig_surv_1.add_trace(go.Scatter(
-        x=df['Dias'],
-        y=df['Probabilidad de pasar más días afuera'],
-        line_color=line_color_l,
-        name=name
-    ))
+#     fig_surv_1.add_trace(go.Scatter(
+#         x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
+#         y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
+#         fill='toself',
+#         fillcolor=fillcolor,
+#         line_color=line_color,
+#         showlegend=False,
+#         name=name
+#     ))
+#     fig_surv_1.add_trace(go.Scatter(
+#         x=df['Dias'],
+#         y=df['Probabilidad de pasar más días afuera'],
+#         line_color=line_color_l,
+#         name=name
+#     ))
 
-fig_surv_1.update_layout(
-    xaxis_title ="Días",
-    yaxis_title = "P(t > T)",
-    title = 'Días entre la primera y segunda reincidencia',
-    font=dict(
-        family="Courier New, monospace",
-        size=18,
-        color="#7f7f7f"
-    ),
-    width=800, height=400
-)
+# fig_surv_1.update_layout(
+#     xaxis_title ="Días",
+#     yaxis_title = "P(t > T)",
+#     title = 'Días entre la primera y segunda reincidencia',
+#     font=dict(
+#         family="Courier New, monospace",
+#         size=18,
+#         color="#7f7f7f"
+#     ),
+#     width=800, height=400
+# )
 
-fig_surv_1.update_traces(mode='lines')
+# fig_surv_1.update_traces(mode='lines')
 
-fig_surv_2 = go.Figure()
+# fig_surv_2 = go.Figure()
 
-for i in [0, 2]:
-    kmf = KaplanMeierFitter()
-    kmf.fit(df_kmkm.loc[df_kmkm['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_kmkm.loc[df_kmkm['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
+# for i in [0, 2]:
+#     kmf = KaplanMeierFitter()
+#     kmf.fit(df_kmkm.loc[df_kmkm['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_kmkm.loc[df_kmkm['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
 
-    if i == 0:
-        name= 'Días fuera de la cárcel (95% IC)'
-        fillcolor='rgba(0,176,246,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(0,176,246)'
-    else:
-        name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
-        fillcolor='rgba(231,107,243,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(231,107,243)'
+#     if i == 0:
+#         name= 'Días fuera de la cárcel (95% IC)'
+#         fillcolor='rgba(0,176,246,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(0,176,246)'
+#     else:
+#         name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
+#         fillcolor='rgba(231,107,243,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(231,107,243)'
 
-    df = kmf.survival_function_.reset_index()
-    df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
+#     df = kmf.survival_function_.reset_index()
+#     df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
 
-    df_interval = kmf.confidence_interval_survival_function_.reset_index()
-    df_interval.columns = ['Dias', 'lwr', 'upr']
+#     df_interval = kmf.confidence_interval_survival_function_.reset_index()
+#     df_interval.columns = ['Dias', 'lwr', 'upr']
 
-    fig_surv_2.add_trace(go.Scatter(
-        x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
-        y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
-        fill='toself',
-        fillcolor=fillcolor,
-        line_color=line_color,
-        showlegend=False,
-        name=name
-    ))
-    fig_surv_2.add_trace(go.Scatter(
-        x=df['Dias'],
-        y=df['Probabilidad de pasar más días afuera'],
-        line_color=line_color_l,
-        name=name,
-    ))
+#     fig_surv_2.add_trace(go.Scatter(
+#         x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
+#         y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
+#         fill='toself',
+#         fillcolor=fillcolor,
+#         line_color=line_color,
+#         showlegend=False,
+#         name=name
+#     ))
+#     fig_surv_2.add_trace(go.Scatter(
+#         x=df['Dias'],
+#         y=df['Probabilidad de pasar más días afuera'],
+#         line_color=line_color_l,
+#         name=name,
+#     ))
 
-fig_surv_2.update_layout(
-    xaxis_title ="Días",
-    yaxis_title = "P(t > T)",
-    title = 'Días entre la segunda y tercera reincidencia',
-    font=dict(
-        family="Courier New, monospace",
-        size=18,
-        color="#7f7f7f"
-    ),
-    width=800, height=400
-)
+# fig_surv_2.update_layout(
+#     xaxis_title ="Días",
+#     yaxis_title = "P(t > T)",
+#     title = 'Días entre la segunda y tercera reincidencia',
+#     font=dict(
+#         family="Courier New, monospace",
+#         size=18,
+#         color="#7f7f7f"
+#     ),
+#     width=800, height=400
+# )
 
-fig_surv_2.update_traces(mode='lines')
+# fig_surv_2.update_traces(mode='lines')
 
-fig_surv_3 = go.Figure()
+# fig_surv_3 = go.Figure()
 
-for i in [0, 3]:
-    kmf = KaplanMeierFitter()
-    kmf.fit(df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
+# for i in [0, 3]:
+#     kmf = KaplanMeierFitter()
+#     kmf.fit(df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
 
-    if i == 0:
-        name= 'Días fuera de la cárcel (95% IC)'
-        fillcolor='rgba(0,176,246,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(0,176,246)'
-    else:
-        name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
-        fillcolor='rgba(231,107,243,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(231,107,243)'
+#     if i == 0:
+#         name= 'Días fuera de la cárcel (95% IC)'
+#         fillcolor='rgba(0,176,246,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(0,176,246)'
+#     else:
+#         name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
+#         fillcolor='rgba(231,107,243,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(231,107,243)'
 
-    df = kmf.survival_function_.reset_index()
-    df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
+#     df = kmf.survival_function_.reset_index()
+#     df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
 
-    df_interval = kmf.confidence_interval_survival_function_.reset_index()
-    df_interval.columns = ['Dias', 'lwr', 'upr']
+#     df_interval = kmf.confidence_interval_survival_function_.reset_index()
+#     df_interval.columns = ['Dias', 'lwr', 'upr']
 
-    fig_surv_3.add_trace(go.Scatter(
-        x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
-        y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
-        fill='toself',
-        fillcolor=fillcolor,
-        line_color=line_color,
-        showlegend=False,
-        name=name,
-    ))
-    fig_surv_3.add_trace(go.Scatter(
-        x=df['Dias'],
-        y=df['Probabilidad de pasar más días afuera'],
-        line_color=line_color_l,
-        name=name,
-    ))
+#     fig_surv_3.add_trace(go.Scatter(
+#         x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
+#         y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
+#         fill='toself',
+#         fillcolor=fillcolor,
+#         line_color=line_color,
+#         showlegend=False,
+#         name=name,
+#     ))
+#     fig_surv_3.add_trace(go.Scatter(
+#         x=df['Dias'],
+#         y=df['Probabilidad de pasar más días afuera'],
+#         line_color=line_color_l,
+#         name=name,
+#     ))
 
-fig_surv_3.update_layout(
-    xaxis_title ="Días",
-    yaxis_title = "P(t > T)",
-    title = 'Días entre la tercera y cuarta reincidencia',
-    font=dict(
-        family="Courier New, monospace",
-        size=18,
-        color="#7f7f7f"
-    ),
-    width=800, height=400
-)
+# fig_surv_3.update_layout(
+#     xaxis_title ="Días",
+#     yaxis_title = "P(t > T)",
+#     title = 'Días entre la tercera y cuarta reincidencia',
+#     font=dict(
+#         family="Courier New, monospace",
+#         size=18,
+#         color="#7f7f7f"
+#     ),
+#     width=800, height=400
+# )
 
-fig_surv_3.update_traces(mode='lines')
+# fig_surv_3.update_traces(mode='lines')
 
-fig_surv_4 = go.Figure()
+# fig_surv_4 = go.Figure()
 
-for i in [0, 4]:
-    kmf = KaplanMeierFitter()
-    kmf.fit(df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
+# for i in [0, 4]:
+#     kmf = KaplanMeierFitter()
+#     kmf.fit(df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i,'DIAS_LIBRE'], df_kmkmkm.loc[df_kmkmkm['NUMERO_REINCIDENCIAS']>i, 'CENSURADO_LIBRES'])
 
-    if i == 0:
-        name= 'Días fuera de la cárcel (95% IC)'
-        fillcolor='rgba(0,176,246,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(0,176,246)'
-    else:
-        name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
-        fillcolor='rgba(231,107,243,0.2)'
-        line_color='rgba(255,255,255,0)'
-        line_color_l='rgb(231,107,243)'
+#     if i == 0:
+#         name= 'Días fuera de la cárcel (95% IC)'
+#         fillcolor='rgba(0,176,246,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(0,176,246)'
+#     else:
+#         name = 'Días fuera de la cárcel sólo con reincidentes (95% IC)'
+#         fillcolor='rgba(231,107,243,0.2)'
+#         line_color='rgba(255,255,255,0)'
+#         line_color_l='rgb(231,107,243)'
 
-    df = kmf.survival_function_.reset_index()
-    df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
+#     df = kmf.survival_function_.reset_index()
+#     df.columns = ['Dias', 'Probabilidad de pasar más días afuera']
 
-    df_interval = kmf.confidence_interval_survival_function_.reset_index()
-    df_interval.columns = ['Dias', 'lwr', 'upr']
+#     df_interval = kmf.confidence_interval_survival_function_.reset_index()
+#     df_interval.columns = ['Dias', 'lwr', 'upr']
 
-    fig_surv_4.add_trace(go.Scatter(
-        x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
-        y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
-        fill='toself',
-        fillcolor=fillcolor,
-        line_color=line_color,
-        showlegend=False,
-        name=name,
-    ))
-    fig_surv_4.add_trace(go.Scatter(
-        x=df['Dias'],
-        y=df['Probabilidad de pasar más días afuera'],
-        line_color=line_color_l,
-        name=name,
-    ))
+#     fig_surv_4.add_trace(go.Scatter(
+#         x=list(df_interval.Dias)+list(df_interval.Dias)[::-1],
+#         y=list(df_interval.upr)+list(df_interval.lwr)[::-1],
+#         fill='toself',
+#         fillcolor=fillcolor,
+#         line_color=line_color,
+#         showlegend=False,
+#         name=name,
+#     ))
+#     fig_surv_4.add_trace(go.Scatter(
+#         x=df['Dias'],
+#         y=df['Probabilidad de pasar más días afuera'],
+#         line_color=line_color_l,
+#         name=name,
+#     ))
 
-fig_surv_4.update_layout(
-    xaxis_title ="Días",
-    yaxis_title = "P(t > T)",
-    title = 'Días entre la cuarta y quinta reincidencia',
-    font=dict(
-        family="Courier New, monospace",
-        size=18,
-        color="#7f7f7f"
-    ),
-    width=800, height=400
-)
+# fig_surv_4.update_layout(
+#     xaxis_title ="Días",
+#     yaxis_title = "P(t > T)",
+#     title = 'Días entre la cuarta y quinta reincidencia',
+#     font=dict(
+#         family="Courier New, monospace",
+#         size=18,
+#         color="#7f7f7f"
+#     ),
+#     width=800, height=400
+# )
 
-fig_surv_4.update_traces(mode='lines')
+# fig_surv_4.update_traces(mode='lines')
 
 #################################################################################
 # Here the layout for the plots to use.
@@ -475,26 +475,26 @@ timeanalysis_output=html.Div([
 	]),
     dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_freedom_work, id='time_freedom_work_act')),
-        dbc.Col(dcc.Graph(figure=fig_surv_1, id='fig_surv_1')),
+        # dbc.Col(dcc.Graph(figure=fig_surv_1, id='fig_surv_1')),
 	]),
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_surv_2, id='fig_surv_2')),
-        dbc.Col(dcc.Graph(figure=fig_surv_3, id='fig_surv_3')),
-	]),
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_surv_4, id='fig_surv_4')),
-        dbc.Col(),
-	]),
+    # dbc.Row([
+    #     dbc.Col(dcc.Graph(figure=fig_surv_2, id='fig_surv_2')),
+    #     dbc.Col(dcc.Graph(figure=fig_surv_3, id='fig_surv_3')),
+	# ]),
+    # dbc.Row([
+    #     dbc.Col(dcc.Graph(figure=fig_surv_4, id='fig_surv_4')),
+    #     dbc.Col(),
+	# ]),
 	],className="mj-body")
 
 
-survival_model=html.Div([
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_surv_1, id='fig_surv_1')),
-        dbc.Col(dcc.Graph(figure=fig_surv_2, id='fig_surv_2'))
-	]),
-    dbc.Row([
-        dbc.Col(dcc.Graph(figure=fig_surv_3, id='fig_surv_3')),
-        dbc.Col(dcc.Graph(figure=fig_surv_4, id='fig_surv_4')),
-	]),
-	],className="mj-body")
+# survival_model=html.Div([
+#     dbc.Row([
+#         dbc.Col(dcc.Graph(figure=fig_surv_1, id='fig_surv_1')),
+#         dbc.Col(dcc.Graph(figure=fig_surv_2, id='fig_surv_2'))
+# 	]),
+#     dbc.Row([
+#         dbc.Col(dcc.Graph(figure=fig_surv_3, id='fig_surv_3')),
+#         dbc.Col(dcc.Graph(figure=fig_surv_4, id='fig_surv_4')),
+# 	]),
+# 	],className="mj-body")

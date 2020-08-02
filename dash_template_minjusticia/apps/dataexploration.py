@@ -8,7 +8,7 @@ import dash_html_components as html
 
 #Recall app
 from app import app
-from lib import rightpanel, cards, geographic, tabs
+from lib import tabs
 
 layout = html.Section(
     id="main-content",
@@ -41,8 +41,12 @@ layout = html.Section(
                                         html.Div(
                                             className = "row content-panel",
                                             children = [
-                                                tabs.navigationTabs,
-                                                tabs.content
+                                                html.Div(
+                                                    className = "col-md-12",
+                                                    children = [
+                                                        tabs.navigationTabs,
+                                                    ]
+                                                )
 
                                             ]
                                         )
