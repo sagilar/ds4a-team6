@@ -23,7 +23,7 @@ import flask
 from app import app
 
 # Apps
-from apps import home, models, dataexploration
+from apps import home, models#, dataexploration
 
 
 

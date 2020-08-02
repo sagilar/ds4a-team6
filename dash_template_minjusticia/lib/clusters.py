@@ -26,30 +26,30 @@ df_dropdown_crimes = df_crimes[['label', 'value']]
 crimes = json.loads(df_dropdown_crimes.to_json(orient="records"))
 
 ## Loading models
-cluster_model_1 = pickle.load(open("data/kmeans_model_no_education.pickle", 'rb'))
-cluster_model_2 = pickle.load(open("data/kmeans_model_education.pickle", 'rb'))
+cluster_model_1 = pickle.load(open("data/nb_model_no_education.pickle", 'rb'))
+cluster_model_2 = pickle.load(open("data/nb_model_education.pickle", 'rb'))
 
 cluster1_map = {
-	0:"Grupo altamente poblado, nivel medio de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría realiza actividades de trabajo y estudio. En su mayoría son hombres.",
-	1:"Grupo bajamente poblado, nivel medio de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría no realiza actividades de trabajo ni estudio. En su mayoría son hombres.",
-	2:"Grupo altamente poblado, nivel medio de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo y estudio. En su mayoría son hombres.",
-	3:"Grupo altamente poblado, nivel medio de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo pero no actividades de estudio. En su mayoría son hombres.",
-	4:"Grupo altamente poblado, nivel medio de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría no realiza actividades de trabajo ni actividades de estudio. En su mayoría son hombres.",
-	5:"Grupo altamente poblado, nivel medio-bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría no realiza actividades de trabajo pero sí actividades de estudio. En su mayoría son hombres.",
-	6:"Grupo medianamente poblado, nivel medio de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría no realiza actividades de trabajo pero sí actividades de estudio. En su mayoría son hombres.",
-	7:"Grupo bajamente poblado, nivel medio de educación, crímenes de reincidencia bajos, cumplimiento de pena dentro y fuera de la cárcel en partes similares, se realizan o no actividades de estudio y trabajo en partes similares. En su mayoría son hombres.",
+	0:"Grupo medianamente poblado, nivel variado de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría no realiza actividades de trabajo ni actividades de estudio. En su mayoría son hombres.",
+	1:"Grupo altamente poblado, nivel variado de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo y estudio. En su mayoría son hombres.",
+	2:"Grupo medianamente poblado, nivel variado de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo pero no actividades de estudio. En su mayoría son hombres.",
+	3:"Grupo altamente poblado, nivel variado de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría realiza actividades de trabajo y actividades de estudio. En su mayoría son hombres.",
+	4:"Grupo altamente poblado, nivel variado-bajo de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría no realiza actividades de trabajo pero sí actividades de estudio. En su mayoría son hombres.",
+	5:"Grupo medianamente poblado, nivel variado de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría no realiza actividades de trabajo pero sí actividades de estudio. En su mayoría son hombres.",
+	6:"Grupo bajamente poblado, nivel variado de educación, crímenes de reincidencia bajos, cumplimiento de pena dentro y fuera de la cárcel, donde se realiza o no actividades de trabajo y estudio en partes similares. En su mayoría son hombres.",
+	7:"Grupo bajamente poblado, nivel variado de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena dentro de la cárcel en partes similares, donde la mayoría no realiza actividades de trabajo ni actividades de estudio. En su mayoría son hombres.",
 }
 cluster2_map = {
-	0:"Grupo altamente poblado, nivel alto de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo y las actividades de estudio se realizan o no en partes iguales. En su mayoría son hombres.",
-	1:"Grupo medianamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro y fuera de la cárcel, donde la mayoría no realiza actividades de trabajo ni actividades de estudio. En su mayoría son hombres.",
-	2:"Grupo altamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo y estudio. En su mayoría son hombres.",
-	3:"Grupo medianamente poblado, nivel alto de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena fuera de la cárcel mayormente, donde la mayoría no realiza actividades de trabajo ni actividades de estudio. En su mayoría son hombres.",
-	4:"Grupo medianamente poblado, nivel variado de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel mayormente, se realizan o no actividades de estudio y trabajo en partes similares. En su mayoría son mujeres.",
-	5:"Grupo altamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde se realiza o no actividades de trabajo en partes similares y la mayoría realiza actividades de estudio. En su mayoría son hombres.",
-	6:"Grupo altamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría no realiza actividades de trabajo pero sí actividades de estudio. En su mayoría son hombres.",
-	7:"Grupo medianamente poblado, nivel bajo de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena dentro de la cárcel mayormente, donde la mayoría realiza actividades de trabajo pero no actividades de estudio. En su mayoría son hombres.",
-	8:"Grupo medianamente poblado, nivel alto de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría no realiza actividades de trabajo pero sí actividades de estudio. En su mayoría son hombres.",
-	9:"Grupo bajamente poblado, nivel alto de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría realiza actividades de trabajo y actividades de estudio. En su mayoría son hombres.",
+	0:"Grupo medianamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría realiza actividades de trabajo y estudio. En su mayoría son hombres.",
+	1:"Grupo medianamente poblado, nivel alto de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde se realiza o no actividades de trabajo en partes similares y la mayoría realiza actividades de estudio. En su mayoría son hombres.",
+	2:"Grupo medianamente poblado, nivel bajo de educación, crímenes de reincidencia medianamente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo pero no actividades de estudio. En su mayoría son hombres.",
+	3:"Grupo altamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel mayormente, donde la mayoría realiza actividades de trabajo y actividades de estudio. En su mayoría son hombres.",
+	4:"Grupo altamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde no se realizan actividades de trabajo pero la mayoría realiza actividades de estudio. En su mayoría son hombres.",
+	5:"Grupo medianamente poblado, nivel variado de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro y fuera de la cárcel, donde se realiza o no actividades de trabajo y estudio en partes similares. En su mayoría son mujeres.",
+	6:"Grupo bajamente poblado, nivel alto de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel mayormente, donde la mayoría no realiza actividades de trabajo ni actividades de estudio. En su mayoría son hombres.",
+	7:"Grupo medianamente poblado, nivel medio-alto de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría no realiza actividades de trabajo pero sí actividades de estudio. En su mayoría son hombres.",
+	8:"Grupo altamente poblado, nivel medio-alto de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena dentro de la cárcel, donde la mayoría realiza actividades de trabajo y las actividades de estudio se realizan o no en partes similares. En su mayoría son hombres.",
+	9:"Grupo medianamente poblado, nivel bajo de educación, crímenes de reincidencia generalmente altos, cumplimiento de pena fuera de la cárcel, donde la mayoría no realiza actividades de trabajo y las actividades de estudio se realizan o no en partes similares. En su mayoría son hombres.",
 }
 
 
@@ -61,11 +61,11 @@ education_levels = [
                 {'label': 'CICLO IV', 'value': '11'},
                 {'label': 'PROFESIONAL', 'value': '16'},
                 {'label': 'TECNICO', 'value': '13'},
-                {'label': 'TECNICO PROFESIONAL', 'value': '13'},
+                {'label': 'TECNICO PROFESIONAL', 'value': '13.01'},
                 {'label': 'TECNOLOGICO', 'value': '14'},
                 {'label': 'ESPECIALIZACION', 'value': '18'},
-                {'label': 'MAGISTER', 'value': '18'},
-                {'label': 'POST GRADO', 'value': '18'}
+                {'label': 'MAGISTER', 'value': '18.01'},
+                {'label': 'POST GRADO', 'value': '18.02'}
             ]
 
 education_level_map = {
@@ -86,7 +86,7 @@ education_input = dbc.FormGroup(
     [
         dbc.Label("Nivel de Educación:", html_for="education_dropdown"),
         dcc.Dropdown(
-            id='education_dropdown',
+            id='education_dropdown_cluster',
             options= education_levels,
             value='9'
         )
@@ -100,7 +100,7 @@ studies_input = dbc.FormGroup(
                 {"label": "Realiza estudios en el centro de reclusión", "value": 1},
             ],
             value=[],
-            id="studies_toogle",
+            id="studies_toogle_cluster",
             switch=True,
         ),
     ]
@@ -119,9 +119,9 @@ working_input = dbc.FormGroup(
 )
 crime_input = dbc.FormGroup(
     [
-        dbc.Label("Crimen:", html_for="crime_dropdown"),
+        dbc.Label("Crimen:", html_for="crime_dropdown_cluster"),
         dcc.Dropdown(
-            id='crime_dropdown',
+            id='crime_dropdown_cluster',
             options= crimes,
             value="260"
         )
@@ -161,7 +161,7 @@ card_cluster1 = dbc.Card(
                 html.P(
                     children=["init"],
                     className="card-text",
-                    id="card_cluster1",
+                    id="card_cluster1_text",
                 ),
             ]
         ),
@@ -226,17 +226,17 @@ formLayout = html.Div(
 )
 
 @app.callback(
-    Output("card_cluster1_text", "children"),
-    #Output("card_cluster2_text", "children"),
-    [Input('education_dropdown', 'value'),
-     Input('crime_dropdown', 'value'),
-     Input('studies_toogle', 'value'),
+    [Output("card_cluster1_text", "children"),
+    Output("card_cluster2_text", "children")],
+    [Input('education_dropdown_cluster', 'value'),
+     Input('crime_dropdown_cluster', 'value'),
+     Input('studies_toogle_cluster', 'value'),
      Input('working_toogle', 'value'),
      Input('jail_toogle', 'value'),
      Input('gender_toogle', 'value'),
      ]
 )
-def update_text(education, crime, studies, working, jail, gender):
+def update_text_cluster(education, crime, studies, working, jail, gender):
     # Load crime weight:
     if len(df_crimes[df_crimes.value == int(crime)]) > 0:
         weight = int(df_crimes[df_crimes.value == int(crime)].weight)
@@ -245,17 +245,17 @@ def update_text(education, crime, studies, working, jail, gender):
     #1.1. Get info from local model
     ##inputs: covariates = ['NIVEL_EDUCATIVO','logDelito','EN_CARCEL',
     #'ACTIVIDADES_TRABAJO_SI','ACTIVIDADES_ESTUDIO_SI','GENERO_MASCULINO']
+    input_1 = pd.DataFrame([float(int(float(education))*1.8), weight*2.5, len(jail), len(working),
+                                len(studies), len(gender)*1]).T
+    input_2 = pd.DataFrame([float(int(float(education))*3.5), weight*2, len(jail), len(working),
+                                len(studies), len(gender)*2]).T
+    input_1.columns = ['NIVEL_EDUCATIVO','logDelito','EN_CARCEL',
+                        'ACTIVIDADES_TRABAJO_SI','ACTIVIDADES_ESTUDIO_SI','GENERO_MASCULINO']
+    input_2.columns = ['NIVEL_EDUCATIVO','logDelito','EN_CARCEL',
+                        'ACTIVIDADES_TRABAJO_SI','ACTIVIDADES_ESTUDIO_SI','GENERO_MASCULINO']
+    cluster1_result = cluster_model_1.predict(input_1)[0]
+    cluster2_result = cluster_model_2.predict(input_2)[0]
 
-    input_array_1 = np.array([int(education)*1.8,weight*2.5,len(jail),
-                            len(working),len(studies),len(gender)*1])
-    input_df_1 = pd.DataFrame(data=input_array_1)
-    input_array_2 = np.array([int(education)*3.5,weight*2,len(jail),
-                            len(working),len(studies),len(gender)*2])
-    input_df_2 = pd.DataFrame(data=input_array_2)
-    cluster1_result = cluster_model_1.predict(input_df_1)
-    cluster2_result = cluster_model_2.predict(input_df_2)
-    print(cluster1_result)
-    print(cluster2_result)
-    final_cluster1_result = "Cluster " + str(cluster1_result) + ": " + cluster1_map[cluster1_map]
-    final_cluster2_result = "Cluster " + str(cluster2_result) + ": " + cluster2_map[cluster1_map]
+    final_cluster1_result = "Cluster " + str(cluster1_result) + ": " + cluster1_map[cluster1_result]
+    final_cluster2_result = "Cluster " + str(cluster2_result) + ": " + cluster2_map[cluster2_result]
     return final_cluster1_result,final_cluster2_result
