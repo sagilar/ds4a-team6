@@ -1,4 +1,5 @@
-﻿using Ds4At6.Api.Models;
+﻿using Ds4At6.Api.Helpers;
+using Ds4At6.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,35 +12,26 @@ namespace Ds4At6.Api.Controllers
     [ApiController]
     public class RegionsController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly IDataHelper data;
 
-        public RegionsController(DataContext context)
-        {
-            _context = context;
+        public RegionsController(IDataHelper data)
+        {            
+            this.data = data;
         }
 
         // GET: api/Regions
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Region>>> GetRegions(int countryId)
+        public ActionResult<IEnumerable<Region>> GetRegions(int countryId)
         {
-            return await _context.Region
-                .Where(s => s.CountryId == countryId)
-                .OrderBy(s => s.Name)
-                .ToListAsync();
+            return Ok(data.GetRegions(countryId));
         }
 
         // GET: api/Regions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Region>> GetRegion(int id)
+        public ActionResult<Region> GetRegion(int id)
         {
-            var region = await _context.Region.FindAsync(id);
 
-            if (region == null)
-            {
-                return NotFound();
-            }
-
-            return region;
+            return Ok(data.GetRegion(id));
         }
 
     }

@@ -10,5 +10,19 @@ namespace Ds4At6.Api.Helpers
         List<CrimesByScholarshipViewModel> GetCrimesByScholarship();
 
         List<CrimesByMaritalStatusViewModel> GetCrimesByMaritalStatus();
+
+        List<PersonAttributesViewModel> GetPersonsWithKids();
+
+        List<PersonAttributesViewModel> GetPersonsBySex();
+
+        List<PersonAttributesViewModel> GetPersonsByAgeAndGender();
+
+        List<PersonAttributesViewModel> GetPersonsBySpecialCondition();
+
+        List<CrimeViewModel> GetCrimes();
+
+        List<RegionViewModel> GetRegions(int countryId);
+
+        RegionViewModel GetRegion(int regionId);
     }
 }

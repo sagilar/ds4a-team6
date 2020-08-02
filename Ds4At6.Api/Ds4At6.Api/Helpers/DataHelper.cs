@@ -17,6 +17,14 @@ namespace Ds4At6.Api.Helpers
             ConnectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
+        public List<CrimeViewModel> GetCrimes()
+        {
+            var procedure = "GetCrimes";
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<CrimeViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
+
         public List<CrimesByMaritalStatusViewModel> GetCrimesByMaritalStatus()
         {
             var procedure = "GetCrimesByMaritalStatus";
@@ -39,6 +47,56 @@ namespace Ds4At6.Api.Helpers
 
             using SqlConnection connection = new SqlConnection(ConnectionString);
             return connection.Query<CrimesByScholarshipViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
+
+        public List<PersonAttributesViewModel> GetPersonsByAgeAndGender()
+        {
+             var procedure = "GetPersonsByAgeAndSex";
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<PersonAttributesViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
+
+        public List<PersonAttributesViewModel> GetPersonsBySex()
+        {
+            var procedure = "GetPersonsByGender";
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<PersonAttributesViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
+
+        public List<PersonAttributesViewModel> GetPersonsBySpecialCondition()
+        {
+            var procedure = "GetCrimesBySpecialCondition";
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<PersonAttributesViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
+
+        public List<PersonAttributesViewModel> GetPersonsWithKids()
+        {
+            var procedure = "GetCrimesByHasKids";
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<PersonAttributesViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
+        }
+
+        public RegionViewModel GetRegion(int regionId)
+        {
+            var procedure = "GetRegion";
+            var parameters = new { regionId };
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<RegionViewModel>(procedure, parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+        }
+
+        public List<RegionViewModel> GetRegions(int countryId)
+        {
+            var procedure = "GetRegions";
+            var parameters = new {countryId };
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<RegionViewModel>(procedure, parameters, commandType: CommandType.StoredProcedure).ToList();
         }
     }
 }
