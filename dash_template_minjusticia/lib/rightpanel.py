@@ -8,8 +8,6 @@ import dash_html_components as html
 #Recall app
 from app import app
 
-<<<<<<< HEAD
-=======
 highlight1 = html.Div(
     className = "desc",
     children = [
@@ -115,18 +113,10 @@ highlight4 = html.Div(
     ]
 )
 
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
 rightpanel= html.Div(
     className = "col-lg-3 ds",
     children = [
         html.Div(
-<<<<<<< HEAD
-            className = "donut-main",
-            children= [
-                html.H4(
-                    "Datos Demográficos"
-                )
-=======
             children= [
                 html.H4(
                     "Highlights",
@@ -136,7 +126,6 @@ rightpanel= html.Div(
                 highlight2,
                 highlight3,
                 highlight4,
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
             ]
         )
     ]

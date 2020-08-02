@@ -28,11 +28,7 @@ layout = html.Section(
                                             className = "border-head",
                                             children= [
                                                 html.H3(
-<<<<<<< HEAD
-                                                    "Información Geográfica"
-=======
                                                     "Análisis de Reincidencia en Colombia"
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
                                                 )
                                             ]
                                         ),

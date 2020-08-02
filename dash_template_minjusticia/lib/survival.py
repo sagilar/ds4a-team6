@@ -13,10 +13,7 @@ import pandas as pd
 import requests
 
 import pickle ## to load models.
-<<<<<<< HEAD
-=======
 import joblib
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
 
 from app import app
 # Call Webservice to get Crimes List:
@@ -32,14 +29,9 @@ crimes = json.loads(df_dropdown_crimes.to_json(orient="records"))
 #survival_model = pickle.load(open("data/modelo_COX_shdi_P4.pickle", 'rb'))
 #with open(r"data/modelo_COX_shdi_P4.pickle", "rb") as input_file:
 #    survival_model = pickle.load(input_file)
-<<<<<<< HEAD
-
-education_levels = [
-=======
 survival_model = joblib.load("data/modelo_cox_cluster.pickle")
 
 '''education_levels = [
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
                 {'label': 'ANALFABETA', 'value': '1'},
                 {'label': 'CICLO I', 'value': '2'},
                 {'label': 'CICLO II', 'value': '3'},
@@ -52,9 +44,6 @@ survival_model = joblib.load("data/modelo_cox_cluster.pickle")
                 {'label': 'ESPECIALIZACION', 'value': '6'},
                 {'label': 'MAGISTER', 'value': '7'},
                 {'label': 'POST GRADO', 'value': '8'}
-<<<<<<< HEAD
-            ]
-=======
             ]'''
 education_levels = [
                 {'label': 'ANALFABETA', 'value': '0'},
@@ -108,7 +97,6 @@ departments_dd = [
                     {'label': 'vaupes', 'value': 'vaupes'},
                     {'label': 'vichada', 'value': 'vichada'}
                 ]
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
 
 age_input = dbc.FormGroup(
     [
@@ -161,15 +149,6 @@ teaching_input = dbc.FormGroup(
         ),
     ]
 )
-<<<<<<< HEAD
-crime_input = dbc.FormGroup(
-    [
-        dbc.Label("Crimen:", html_for="crime_dropdown"),
-        dcc.Dropdown(
-            id='crime_dropdown',
-            options= crimes,
-            value="260"
-=======
 
 
 department_input = dbc.FormGroup(
@@ -179,46 +158,10 @@ department_input = dbc.FormGroup(
             id='department_dropdown',
             options= departments_dd,
             value='antioquia'
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
         )
     ]
 )
 
-<<<<<<< HEAD
-intento_switch = dbc.FormGroup(
-    [
-        dbc.Label("Clasificación:"),
-        dbc.Checklist(
-            options=[
-                {"label": "Intento", "value": 1},
-            ],
-            value=[],
-            id="intento_toogle",
-            switch=True,
-        ),
-    ]
-)
-calificado_switch = dbc.FormGroup(
-    [
-        dbc.Checklist(
-            options=[
-                {"label": "Calificado", "value": 1},
-            ],
-            value=[],
-            id="calificado_toogle",
-            switch=True,
-        ),
-    ]
-)
-agravado_switch = dbc.FormGroup(
-    [
-        dbc.Checklist(
-            options=[
-                {"label": "Agravado", "value": 1},
-            ],
-            value=[],
-            id="agravado_toogle",
-=======
 dias_condena_input = dbc.FormGroup(
     [
         dbc.Label("Días condena:", html_for="dias_condena_slider-container"),
@@ -244,14 +187,11 @@ jail_switch = dbc.FormGroup(
             ],
             value=[],
             id="jail_toogle_survival",
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
             switch=True,
         ),
     ]
 )
 
-<<<<<<< HEAD
-=======
 cluster_input = dbc.FormGroup(
     [
         dbc.Label("Cluster 2:", html_for="cluster2_survival_text"),
@@ -261,7 +201,6 @@ cluster_input = dbc.FormGroup(
     ]
 )
 
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
 formLayout = html.Div(
     [
         dbc.Row(
@@ -273,18 +212,11 @@ formLayout = html.Div(
                         education_input,
                         studies_input,
                         teaching_input,
-<<<<<<< HEAD
-                        crime_input,
-                        intento_switch,
-                        calificado_switch,
-                        agravado_switch
-=======
                         department_input,
                         dias_condena_input,
                         poblacion_input,
                         jail_switch,
                         cluster_input,
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
 
                     ],
                     md="4"
@@ -306,52 +238,6 @@ formLayout = html.Div(
     [Input('age_text', 'value'),
      Input('events_text', 'value'),
      Input('education_dropdown', 'value'),
-<<<<<<< HEAD
-     Input('crime_dropdown', 'value'),
-     Input('studies_toogle', 'value'),
-     Input('teaching_toogle', 'value'),
-     Input('intento_toogle', 'value'),
-     Input('calificado_toogle', 'value'),
-     Input('agravado_toogle', 'value'),
-
-     ]
-)
-def update_graph(age, events, education, crime, studies, teaching, intento, calificado, agravado):
-    # Load crime weight:
-    if len(df_crimes[df_crimes.value == int(crime)]) > 0:
-        weight = int(df_crimes[df_crimes.value == int(crime)].weight)
-    else:
-        weight = 5
-    # Create payload with form values:
-    payload = {"age": int(age),
-        "cases": int(events),
-        "education_level": int(education),
-        "study": len(studies),
-        "teaching": len(teaching),
-        "attemp": len(intento),
-        "aggravated": len(calificado),
-        "qualified": len(agravado),
-        "weight": weight
-    }
-    print(payload)
-    # Generate chart:
-    #1. Get Info from web service
-    url = "https://team6flaskapi.azurewebsites.net/survival"
-    requestSurvival = requests.post(url, json=payload)
-    df_model = pd.read_json(requestSurvival.text)
-    #1.1. Get info from local model
-    ##["EDAD","tentativa","agravado","calificado","educacion", "ACTIVIDADES_ESTUDIO", "ACTIVIDADES_ENSEÑANZA",
-                  #"NUM_REINCIDENCIAS_ACUM", "En_Carcel","DIAS_CONDENA_ACUM_NORM","gnic_strata","pop**3"]
-
-    '''input_array = np.array([int(age),int(events),int(education),len(studies),
-                            len(teaching),len(intento),len(calificado),
-                            len(agravado),weight])
-    input_df = pd.DataFrame(data=input_array)
-    model_result = survival_model.predict(input_df)
-    print(model_result)'''
-    #2. Generate scatter chart with info
-    fig = go.Figure(data=go.Scatter(x=df_model.dia, y=df_model.prob))
-=======
      Input('studies_toogle', 'value'),
      Input('teaching_toogle', 'value'),
      Input('department_dropdown', 'value'),
@@ -387,6 +273,5 @@ def update_graph(age, events, education, studies, teaching,
     #print("model result survival: " + str(model_result))
     #2. Generate scatter chart with info
     fig = go.Figure(data=go.Scatter(x=model_result.index, y=model_result[0]))
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
     fig.update_layout(xaxis_title ="Días",yaxis_title = "Probabilidad", title = "Probabilidad de Reincidencia en el Tiempo", width=800, height=400)
     return fig

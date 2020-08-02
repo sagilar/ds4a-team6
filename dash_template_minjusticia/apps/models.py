@@ -91,12 +91,6 @@ layout = html.Section(
                                         html.Div(
                                             className = "row content-panel",
                                             children = [
-<<<<<<< HEAD
-                                                tabs_models.navigationTabs,
-                                                tabs_models.content
-
-                                            ]
-=======
                                                 html.Div(
                                                     className = "col-md-12",
                                                     children = [
@@ -104,7 +98,6 @@ layout = html.Section(
                                                     ]
                                                 )
                                               ]
->>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
                                         )
 
 
