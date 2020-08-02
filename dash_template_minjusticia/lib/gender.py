@@ -110,6 +110,7 @@ fig_fem_crime.update_xaxes( tickfont=dict(family='Rockwell', color='black', size
 gender_output=html.Div([
 	#Place the different graph components here.
 	dbc.Row([
+<<<<<<< HEAD
         dbc.Col(dcc.Graph(figure=fig_edu_gen, id='fig_edu_gen')),
         dbc.Col(dcc.Graph(figure=fig_gen_men, id='fig_gen_men')),
 	]),
@@ -124,5 +125,27 @@ gender_output=html.Div([
 	dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_fem_crime, id='fig_fem_crime')),
         dbc.Col(),
+=======
+        dbc.Col(dcc.Graph(figure=fig_edu_gen, id='fig_edu_gen'), md=12),
+	]),
+        dbc.Row([
+        dbc.Col(dcc.Graph(figure=fig_gen_men, id='fig_gen_men'), md=12),
+	]),
+	dbc.Row([
+        dbc.Col(dcc.Graph(figure=fig_gen_women, id='fig_gen_women'), md=12),
+	]),
+        dbc.Row([
+        dbc.Col(dcc.Graph(figure=fig_del_gen, id='fig_del_gen'), md=12),
+	]),
+	dbc.Row([
+        dbc.Col(dcc.Graph(figure=fig_geo_gen, id='fig_geo_gen'), md=12),
+	]),
+	dbc.Row([
+        dbc.Col(dcc.Graph(figure=fig_econo_crime, id='fig_econo_crime'), md=12),
+	]),
+
+	dbc.Row([
+        dbc.Col(dcc.Graph(figure=fig_fem_crime, id='fig_fem_crime'), md=12),
+>>>>>>> d17ec26a8dd76b1ca1502eb23dd585e8b5ba8e00
 	]),
 	],className="mj-body")
