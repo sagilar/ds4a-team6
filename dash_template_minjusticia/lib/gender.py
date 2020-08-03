@@ -40,7 +40,7 @@ fig_edu_gen = px.bar(df_edu_gen, x='NIVEL_EDUCATIVO', y='INTERNOEN',
              labels={'INTERNOEN':'Amount of recidivist crimes'}, width=800, height=400, barmode='group', text="INTERNOEN")
 fig_edu_gen.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_edu_gen.update_layout(uniformtext_minsize=6, uniformtext_mode='hide',
-                  title="Most commited crimes by educational level"
+                  title="Crímenes más cometidos por nivel de educación", xaxis_title = "Nivel Educativo", yaxis_title = "# Casos"
                  )
 
 fig_gen_men = px.bar(df_genero[df_genero["GENERO"]=="MASCULINO"], x='TITULO_DELITO', y='INTERNOEN',
@@ -49,7 +49,7 @@ fig_gen_men = px.bar(df_genero[df_genero["GENERO"]=="MASCULINO"], x='TITULO_DELI
 fig_gen_men.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_gen_men.update_layout(uniformtext_minsize=6, uniformtext_mode='hide', xaxis_tickangle=-45, showlegend=False, autosize=False,
                  width=800, height=700, margin=dict(l=50, r=50, b=100, t=100, pad=4 ),
-                  title="Most commited crimes by men",
+                  title="Crímenes más cometidos por hombres", xaxis_title = "Crimen", yaxis_title = "# Casos"
                  )
 fig_gen_men.update_xaxes( tickfont=dict(family='Rockwell', color='black', size=8)) #tickangle=45,
 
@@ -60,7 +60,7 @@ fig_gen_women = px.bar(df_genero[df_genero["GENERO"]=="FEMENINO"], x='TITULO_DEL
 fig_gen_women.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_gen_women.update_layout(uniformtext_minsize=6, uniformtext_mode='hide', xaxis_tickangle=-45, showlegend=False, autosize=False,
                  width=800, height=700, margin=dict(l=50, r=50, b=100, t=100, pad=4 ),
-                  title="Most commited crimes by women",
+                  title="Crímenes más cometidos por mujeres", xaxis_title = "Crimen", yaxis_title = "# Casos"
                  )
 fig_gen_women.update_xaxes( tickfont=dict(family='Rockwell', color='black', size=8)) #tickangle=45,
 
@@ -70,7 +70,7 @@ fig_del_gen = px.bar(df_genero, x='TITULO_DELITO', y='INTERNOEN',
 fig_del_gen.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_del_gen.update_layout(uniformtext_minsize=7, uniformtext_mode='hide', xaxis_tickangle=-45, showlegend=True, autosize=False,
                  width=800, height=700, margin=dict(l=50, r=50, b=100, t=100, pad=4 ),
-                  title="Most commited crimes per gender",
+                  title="Crímienes más cometidos por género", xaxis_title = "Crimen", yaxis_title = "# Casos"
                  )
 fig_del_gen.update_xaxes( tickfont=dict(family='Rockwell', color='black', size=8)) #tickangle=45,
 
@@ -80,7 +80,7 @@ fig_geo_gen = px.bar(df_geo_gen, x='DEPTO_ESTABLECIMIENTO', y='INTERNOEN',
 fig_geo_gen.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_geo_gen.update_layout(uniformtext_minsize=6, uniformtext_mode='hide', xaxis_tickangle=-45, showlegend=True, autosize=False,
                  width=900, height=700, margin=dict(l=50, r=50, b=100, t=100, pad=4 ),
-                  title="Geographic distribution of recidivism per gender",
+                  title="Distribución geográfica por género", xaxis_title = "", yaxis_title = "# Casos"
                  )
 fig_geo_gen.update_xaxes( tickfont=dict(family='Rockwell', color='black', size=8)) #tickangle=45,
 
@@ -90,17 +90,17 @@ fig_econo_crime = px.bar(economic_crime, x='DELITO', y='COUNT',
 fig_econo_crime.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_econo_crime.update_layout(uniformtext_minsize=6, uniformtext_mode='hide', xaxis_tickangle=-45, showlegend=True, autosize=False,
                  width=900, height=700, margin=dict(l=50, r=50, b=100, t=100, pad=4 ),
-                  title="Most commited crimes against economic patrimony per gender",
+                  title="Crímenes más cometidos contra el patrimonio económico por género", xaxis_title = "Crimen", yaxis_title = "# Casos"
                  )
 fig_econo_crime.update_xaxes( tickfont=dict(family='Rockwell', color='black', size=8)) #tickangle=45,
 
 fig_fem_crime = px.bar(female_crime, x='DELITO', y='COUNT',
              hover_data=["GENERO",'DELITO'], color='GENERO',
-             labels={'COUNT':'Amount of recidivist crimes against public health'}, barmode='relative', text="COUNT")
+             labels={'COUNT':'Número de reincidencias en crímenes contra la salud pública'}, barmode='relative', text="COUNT")
 fig_fem_crime.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_fem_crime.update_layout(uniformtext_minsize=6, uniformtext_mode='hide', xaxis_tickangle=-45, showlegend=True, autosize=False,
                  width=900, height=700, margin=dict(l=50, r=50, b=100, t=100, pad=4 ),
-                  title="Most commited crimes against public health per gender",
+                  title="Crímenes más cometidos contra la salud pública por género", xaxis_title = "Crimen", yaxis_title = "# Casos"
                  )
 fig_fem_crime.update_xaxes( tickfont=dict(family='Rockwell', color='black', size=8)) #tickangle=45,
 

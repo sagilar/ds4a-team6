@@ -27,8 +27,8 @@ df_dept_count = df_dept_count[["region", "events"]]
 ###############################################################
 
 Rec_dep_fig = px.histogram(df_dept_count,x="region",y="events",nbins=50,hover_data=["region","events"],
-                 width=800, height=400)
-Rec_dep_fig.update_layout(title="Reincidencia por Departamento", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
+                 width=900, height=600)
+Rec_dep_fig.update_layout(title="Reincidencia por Departamento", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', xaxis_title = "Región", yaxis_title = "# Reincidentes")
 
 
 add_data = {'region':["VAUPES","VICHADA","GUAVIARE","GUAINIA"],'events':[0,0,0,0]}

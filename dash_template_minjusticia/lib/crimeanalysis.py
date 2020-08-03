@@ -141,7 +141,7 @@ fig = go.Figure(data=[edge_trace, node_trace],
                 xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
                 )
-fig.update_layout(title="Crime analysis")
+fig.update_layout(title="Análisis de Relación entre Crímenes")
 
 
 

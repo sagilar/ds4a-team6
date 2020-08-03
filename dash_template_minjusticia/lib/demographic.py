@@ -39,26 +39,26 @@ rAgeAndSex = requests.get("http://ds4at6api.azurewebsites.net/api/PersonsByAttri
 dfAgeAndSex =pd.read_json(rAgeAndSex.text)
 
 MS_hist = px.histogram(dfMaritalStatus,x="maritalStatus",y="events",nbins=50,hover_data=["maritalStatus","events"])
-MS_hist.update_layout(title="Histograma de Estado Civil")
+MS_hist.update_layout(title="Histograma de Estado Civil", xaxis_title = "Estado Civil", yaxis_title = "# Reincidentes")
 
 MC_hist = px.histogram(dfKids,x="hasKids",y="events",nbins=50,hover_data=["hasKids","events"],color="hasKids")
-MC_hist.update_layout(title="Histograma de Hijos Menores")
+MC_hist.update_layout(title="Histograma de Hijos Menores", xaxis_title = "Tiene Hijos", yaxis_title = "# Reincidentes", legend_title = "Tiene Hijos")
 
 EL_hist = px.histogram(dfEducationLevel,x="scholarship",y="events",nbins=50,hover_data=["scholarship","events"])
-EL_hist.update_layout(title="Education Level Histogram")
+EL_hist.update_layout(title="Histograma de Nivel de Educación", xaxis_title = "Escolaridad", yaxis_title = "# Reincidentes")
 
 ET_hist = px.histogram(dfSpecialCondition,x="condition",y="events",nbins=50,hover_data=["condition","events"])
-ET_hist.update_layout(title="Race/Ethnicity Histogram")
+ET_hist.update_layout(title="Histograma de Etnia o Raza", xaxis_title = "Raza", yaxis_title = "# Reincidentes")
 
 df_mj_men = dfAgeAndSex[dfAgeAndSex["gender"]=="MASCULINO"]
 
 MA_hist = px.histogram(df_mj_men,x="age",y="events",nbins=50,hover_data=["age","events"])
-MA_hist.update_layout(title="Age Histogram of Male Recidivists")
+MA_hist.update_layout(title="Histograma de reincidencia por edad en hombres", xaxis_title = "Edad", yaxis_title = "# Reincidentes")
 
 df_mj_women = dfAgeAndSex[dfAgeAndSex["gender"]=="FEMENINO"]
 
 WA_hist = px.histogram(df_mj_women,x="age",y="events",nbins=50,hover_data=["age","events"])
-WA_hist.update_layout(title="Age Histogram of Female Recidivists")
+WA_hist.update_layout(title="Histograma de reincidencia por edad en mujeres", xaxis_title = "Edad", yaxis_title = "# Reincidentes")
 
 #################################################################################
 # Here the layout for the plots to use.
@@ -67,16 +67,22 @@ demographic_output=html.Div([
 	#Place the different graph components here.
 	dbc.Row([
         dbc.Col(dcc.Graph(figure=MS_hist, id='MS_hist')),
+	]),
+	dbc.Row([
         dbc.Col(dcc.Graph(figure=MC_hist, id='MC_hist')),
 	]),
 	html.Hr(),
 	dbc.Row([
         dbc.Col(dcc.Graph(figure=EL_hist, id='EL_hist')),
+	]),
+	dbc.Row([
         dbc.Col(dcc.Graph(figure=ET_hist, id='ET_hist')),
 	]),
 	html.Hr(),
 	dbc.Row([
         dbc.Col(dcc.Graph(figure=MA_hist, id='MA_hist')),
+	]),
+	dbc.Row([
         dbc.Col(dcc.Graph(figure=WA_hist, id='WA_hist')),
 	]),
 	html.Hr(),
