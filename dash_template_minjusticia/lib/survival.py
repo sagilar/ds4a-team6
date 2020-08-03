@@ -186,7 +186,7 @@ jail_switch = dbc.FormGroup(
                 {"label": "Carcel", "value": 1},
             ],
             value=[],
-            id="jail_toogle_survival",
+            id="jail_",
             switch=True,
         ),
     ]
@@ -194,9 +194,9 @@ jail_switch = dbc.FormGroup(
 
 cluster_input = dbc.FormGroup(
     [
-        dbc.Label("Cluster 2:", html_for="cluster2_survival_text"),
+        dbc.Label("Cluster 2:", html_for="cluster2_"),
         html.Div(id='cluster2_survival_slider-container'),
-        dbc.Input(type="number", min=0, max=9, value="0", step=1, id="cluster2_survival_text")
+        dbc.Input(type="number", min=0, max=9, value="5", step=1, id="cluster2_")
 
     ]
 )
@@ -243,8 +243,8 @@ formLayout = html.Div(
      Input('department_dropdown', 'value'),
      Input('dias_condena_text', 'value'),
      Input('poblacion_text', 'value'),
-     Input('jail_toogle_survival', 'value'),
-     Input('cluster2_survival_text', 'value'),
+     Input('jail_', 'value'),
+     Input('cluster2_', 'value'),
      ]
 )
 def update_graph(age, events, education, studies, teaching,
@@ -261,12 +261,13 @@ def update_graph(age, events, education, studies, teaching,
     department_value = 0
     if department in gnic_data:
         department_value = 1
+    print(jail,cluster)
     input = pd.DataFrame([int(age), int(education), len(studies), len(teaching),
                                 int(events), float(int(dias_condena)/360),int(department_value),
-                                (float(poblacion)-3.381724814991324)**3,len(jail),int(cluster)]).T
+                                (float(poblacion)-3.381724814991324)**3,len(jail),float(cluster)]).T
     input.columns=["EDAD","educacion", "ACTIVIDADES_ESTUDIO", "ACTIVIDADES_ENSEÑANZA",
                 "NUM_REINCIDENCIAS_ACUM", "DIAS_CONDENA_ACUM_NORM","gnic_strata","pop**3","En_Carcel","cluster_2"]
-    #print(input)
+    print(input)
     #INPUTS = [EDAD- educacion- ACTIVIDADES_ESTUDIO- ACTIVIDADES_ENSEÑANZA-
     #NUM_REINCIDENCIAS_ACUM- DIAS_CONDENA_ACUM_NORM+(DIAS/360) gnic_strata+('0-1') pop+(POBLACION_MILLONES-3.381724814991324)**3 En_Carcel cluster_2]
     model_result = survival_model.predict_survival_function(input)
@@ -274,4 +275,12 @@ def update_graph(age, events, education, studies, teaching,
     #2. Generate scatter chart with info
     fig = go.Figure(data=go.Scatter(x=model_result.index, y=model_result[0]))
     fig.update_layout(xaxis_title ="Días",yaxis_title = "Probabilidad", title = "Probabilidad de Reincidencia en el Tiempo", width=800, height=400)
+    
+    #################################################################################
+    # Here the layout for the plots to use.
+    #################################################################################
+    output_html=html.Div([
+        #Place the different graph components here.
+        dcc.Graph(figure=fig,id="result_output"),
+        ],className="mj-body")
     return fig
