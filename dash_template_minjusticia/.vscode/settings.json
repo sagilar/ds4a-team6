@@ -1,3 +1,36 @@
 {
-    "python.pythonPath": "c:\\Users\\leona\\anaconda3\\envs\\condadash\\python.exe"
+    "python.pythonPath": "c:\\Users\\leona\\anaconda3\\envs\\condadash\\python.exe",
+    "appService.zipIgnorePattern": [
+        "__pycache__{,/**}",
+        "*.py[cod]",
+        "*$py.class",
+        ".Python{,/**}",
+        "build{,/**}",
+        "develop-eggs{,/**}",
+        "dist{,/**}",
+        "downloads{,/**}",
+        "eggs{,/**}",
+        ".eggs{,/**}",
+        "lib{,/**}",
+        "lib64{,/**}",
+        "parts{,/**}",
+        "sdist{,/**}",
+        "var{,/**}",
+        "wheels{,/**}",
+        "share/python-wheels{,/**}",
+        "*.egg-info{,/**}",
+        ".installed.cfg",
+        "*.egg",
+        "MANIFEST",
+        ".env{,/**}",
+        ".venv{,/**}",
+        "env{,/**}",
+        "venv{,/**}",
+        "ENV{,/**}",
+        "env.bak{,/**}",
+        "venv.bak{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/08db5082-140c-4030-90f8-eba70bcd2d4f/resourceGroups/Ds4aTeam6/providers/Microsoft.Web/sites/ds4app",
+    "appService.deploySubpath": "."
 }
