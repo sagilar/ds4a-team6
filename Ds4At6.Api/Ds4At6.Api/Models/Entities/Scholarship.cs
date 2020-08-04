@@ -10,6 +10,7 @@ namespace Ds4At6.Api.Models
         public int ScholarshipId { get; set; }
         public string Name { get; set; }
 
- 
+        public int Level { get; set; }
+
     }
 }

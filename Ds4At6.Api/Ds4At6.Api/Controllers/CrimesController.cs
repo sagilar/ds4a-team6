@@ -21,5 +21,11 @@ namespace Ds4At6.Api.Controllers
         {
             return Ok(this.data.GetCrimes());
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<IEnumerable<CrimeViewModel>> GetCrime(int id)
+        {
+            return Ok(this.data.GetCrime(id));
+        }
     }
 }

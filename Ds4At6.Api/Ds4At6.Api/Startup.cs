@@ -1,3 +1,4 @@
+using Ds4At6.Api.Configuration;
 using Ds4At6.Api.Helpers;
 using Ds4At6.Api.Models;
 using Microsoft.AspNetCore.Builder;
@@ -6,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace Ds4At6.Api
 {
@@ -25,6 +28,20 @@ namespace Ds4At6.Api
 
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(ConnectionString));
+
+
+            services.Configure<PredictiveApiConfiguration>(
+                Configuration.GetSection(nameof(PredictiveApiConfiguration)));
+
+            // Make the ApiConfig available to dependancy injcection
+            services.AddSingleton<IPredictiveApiConfiguration>(sp =>
+                sp.GetRequiredService<IOptions<PredictiveApiConfiguration>>().Value);
+
+            // the AddHttpClient() will provide us with an instance of HttpClient
+            // available for Dependancy Injection in our services
+            services.AddHttpClient<IPredictiveApiService, PredictiveApiService>(o =>
+                                  o.BaseAddress = new Uri(Configuration["PredictiveApiConfiguration:BaseUrl"]));
+
 
             services.AddHttpContextAccessor();
             services.AddScoped<IDataHelper, DataHelper>();

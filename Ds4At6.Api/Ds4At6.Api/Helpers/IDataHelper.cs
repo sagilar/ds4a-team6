@@ -21,6 +21,8 @@ namespace Ds4At6.Api.Helpers
 
         List<CrimeViewModel> GetCrimes();
 
+        CrimeViewModel GetCrime(int id);
+
         List<RegionViewModel> GetRegions(int countryId);
 
         RegionViewModel GetRegion(int regionId);

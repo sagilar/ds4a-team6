@@ -21,6 +21,7 @@ import flask
 
 #Recall app
 from app import app
+from app import server
 
 # Apps
 from apps import home, models, dataexploration
@@ -106,6 +107,6 @@ def display_page(pathname):
 
 
 
-# if __name__ == "__main__":
-#     app.run_server(debug=True, port=80)
-#     freeze_support()
+if __name__ == "__main__":
+    app.run_server(host='0.0.0.0')
+    #freeze_support()

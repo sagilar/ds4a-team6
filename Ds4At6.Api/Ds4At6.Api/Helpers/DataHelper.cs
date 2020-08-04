@@ -25,6 +25,15 @@ namespace Ds4At6.Api.Helpers
             return connection.Query<CrimeViewModel>(procedure, null, commandType: CommandType.StoredProcedure).ToList();
         }
 
+        public CrimeViewModel GetCrime(int id)
+        {
+            var procedure = "GetCrime";
+            var param = new { id } ;
+
+            using SqlConnection connection = new SqlConnection(ConnectionString);
+            return connection.Query<CrimeViewModel>(procedure, param, commandType: CommandType.StoredProcedure).FirstOrDefault();
+        }
+
         public List<CrimesByMaritalStatusViewModel> GetCrimesByMaritalStatus()
         {
             var procedure = "GetCrimesByMaritalStatus";
