@@ -168,7 +168,7 @@ fig_genero = px.box(
     y='DIAS_CONDENA',
     color = 'GENERO',
     width=800, height=400)
-fig_genero.update_layout(title='TOTAL DAYS OUTSIDE JAIL BY GENDER',paper_bgcolor="#F8F9F9")
+fig_genero.update_layout(title='NUMERO TOTAL DE DIAS FUERA DE LA CARCEL',paper_bgcolor="#F8F9F9")
 
 df = df_mj_mod.drop_duplicates(['INTERNOEN', 'FECHA_INGRESO']).groupby(['INTERNOEN', 'ACTIVIDADES_ESTUDIO'])['DIAS_CONDENA'].mean().reset_index(name = 'DIAS_CONDENA')
 df.columns = ['id', 'Actividades de estudio', 'Días de condena']
@@ -180,7 +180,7 @@ fig_act_est = px.box(
     y='Días de condena',
     color = 'Actividades de estudio',
     width=800, height=400)
-fig_act_est.update_layout(title='TOTAL CONVICTION DAYS BY EDUCATION ACTIVITIES',paper_bgcolor="#F8F9F9")
+fig_act_est.update_layout(title='NUMERO DE DIAS EN LA CARCEL POR ACTIVIDADES DE EDUCACION',paper_bgcolor="#F8F9F9")
 
 df = df_mj_mod.groupby(['INTERNOEN', 'ACTIVIDADES_ESTUDIO'])['DIAS_LIBRE'].mean().reset_index(name = 'DIAS_LIBRE')
 df.columns = ['id', 'Actividades de estudio', 'Días en libertad']
@@ -192,7 +192,7 @@ fig_freedom_days = px.box(
     y='Días en libertad',
     color = 'Actividades de estudio',
     width=800, height=400)
-fig_freedom_days.update_layout(title='TOTAL FREEDOM DAYS BY EDUCATION ACTIVITIES',paper_bgcolor="#F8F9F9", height=500)
+fig_freedom_days.update_layout(title='NUMERO DE DÍAS EN LIBERTAD POR ACTIVIDADES DE EDUCACIÓN',paper_bgcolor="#F8F9F9", height=500)
 
 df = df_mj_mod.groupby(['INTERNOEN', 'ACTIVIDADES_ENSEÑANZA'])['DIAS_CONDENA'].mean().reset_index(name = 'DIAS_CONDENA')
 df.columns = ['id', 'Actividades de enseñanza', 'Días de condena']
@@ -204,7 +204,7 @@ fig_teach = px.box(
     y='Días de condena',
     color = 'Actividades de enseñanza',
     width=800, height=400)
-fig_teach.update_layout(title='TOTAL CONVICTION DAYS BY TEACHING ACTIVITIES',paper_bgcolor="#F8F9F9", height=500)
+fig_teach.update_layout(title='DIAS DE CONDENA VS. PERSONAS QUE REALIZAN ACTIVIDADES DE ENSEÑANZA',paper_bgcolor="#F8F9F9", height=500)
 
 df = df_mj_mod.groupby(['INTERNOEN', 'ACTIVIDADES_ENSEÑANZA'])['DIAS_LIBRE'].mean().reset_index(name = 'DIAS_LIBRE')
 df.columns = ['id', 'Actividades de enseñanza', 'Días en libertad']
@@ -216,7 +216,7 @@ fig_freedom_teach = px.box(
     y='Días en libertad',
     color = 'Actividades de enseñanza',
     width=800, height=400)
-fig_freedom_teach.update_layout(title='TOTAL FREEDOM DAYS BY TEACHING ACTIVITIES',paper_bgcolor="#F8F9F9", height=500)
+fig_freedom_teach.update_layout(title='DIAS EN LIBERTAD VS. PERSONAS QUE REALIZAN ACTIVIDADES DE ENSEÑANZA',paper_bgcolor="#F8F9F9", height=500)
 
 df = df_mj_mod.groupby(['INTERNOEN', 'ACTIVIDADES_TRABAJO'])['DIAS_CONDENA'].mean().reset_index(name = 'DIAS_CONDENA')
 df.columns = ['id', 'Actividades de trabajo', 'Días de condena']
@@ -228,7 +228,7 @@ fig_work = px.box(
     y='Días de condena',
     color = 'Actividades de trabajo',
     width=800, height=400)
-fig_work.update_layout(title='TOTAL CONVICTION DAYS BY WORKING ACTIVITIES',paper_bgcolor="#F8F9F9", height=500)
+fig_work.update_layout(title='DIAS DE CONDENA VS. ACTIVIDADES DE TRABAJO',paper_bgcolor="#F8F9F9", height=500)
 
 df = df_mj_mod.groupby(['INTERNOEN', 'ACTIVIDADES_TRABAJO'])['DIAS_LIBRE'].mean().reset_index(name = 'DIAS_LIBRE')
 df.columns = ['id', 'Actividades de trabajo', 'Días en libertad']
@@ -240,7 +240,7 @@ fig_freedom_work = px.box(
     y='Días en libertad',
     color = 'Actividades de trabajo',
     width=800, height=400)
-fig_freedom_work.update_layout(title='TOTAL FREEDOM DAYS BY WORKING ACTIVITIES',paper_bgcolor="#F8F9F9", height=500)
+fig_freedom_work.update_layout(title='DIAS EN LIBERTAD VS. ACTIVIDADES DE TRABAJO',paper_bgcolor="#F8F9F9", height=500)
 
 ### Survival graphs
 
@@ -463,14 +463,20 @@ timeanalysis_output=html.Div([
 	#Place the different graph components here.
 	dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_genero, id='time_outside_jail_gender')),
+	]),
+    dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_act_est, id='time_convictions_edu_act')),
 	]),
     dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_freedom_days, id='time_freedom_edu_act')),
+	]),
+    dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_teach, id='time_convictions_tea_activities')),
 	]),
     dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_freedom_teach, id='time_freedom_tea_act')),
+	]),
+    dbc.Row([
         dbc.Col(dcc.Graph(figure=fig_work, id='time_convictions_work_activities')),
 	]),
     dbc.Row([
